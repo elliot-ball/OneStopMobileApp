@@ -1109,7 +1109,7 @@ function ReturnBlob( data ){
 		$('#informationPanel').removeAttr("left").attr("open", "");
 
 		setTimeout(function() {
-			DrawAvalibleDevices();
+			// DrawAvalibleDevices();
 			DrawDevicesOnMap();
 
 			CurrentDevice = GetDevice( id );
@@ -1118,8 +1118,6 @@ function ReturnBlob( data ){
 					$(item).addClass("selecteddevice");
 				}
 			});
-
-
 
 			DisplayDeviceInformation();
 		}, 10);
@@ -2697,6 +2695,10 @@ function ReturnBlob( data ){
 				$('#informationPanel').removeAttr("open").attr("left", "");
 				$('#DevicesOnMapPanel').removeAttr("right").removeAttr("left").attr("open", "");
 				$('#MissingDevicesPanel').removeAttr("right").removeAttr("left").removeAttr("open").attr("right", "");
+				OnMapFunctions.empty();
+				setTimeout(function() {
+					OnMapFunctions.MoveForward();
+				}, 10);
 			}
 			if( $(this).parents('panel.child').attr("id") == "DevicesOnMapPanel"){
 				$('#DevicesOnMapPanel').removeAttr("open").attr("left", "");
