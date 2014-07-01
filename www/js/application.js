@@ -774,6 +774,7 @@ function ReturnBlob( data ){
 						},File.error);
 					},
 					function(e){
+						alert( Connection.status );
 						if( e.code == 1){
 							if( Connection.status == "online" )
 								Ajax.groups();
@@ -2021,7 +2022,6 @@ function ReturnBlob( data ){
 				});
 			}
 
-			alert( navigator.connection.type );
 			Connection.status = "online";
 			if( ThisDevice.Browser == true){
 				Connection.type = "WiFi";
