@@ -1759,7 +1759,8 @@ function ReturnBlob( data ){
 
 
 	function DrawAvalibleDevices(){
-		$('#infoDeviceNum').val("Number of Devices : " + Devices.length );
+		alert("What are you doing? this takes way too long, remove it, but remember what you pressed to get here")
+/*		$('#infoDeviceNum').val("Number of Devices : " + Devices.length );
 		var OnMap = new Array(); OffMap = new Array();
 
 		for (var i = 0; i < Devices.length; i++) {
@@ -1844,7 +1845,7 @@ function ReturnBlob( data ){
 			console.log("Drawing");
 			$('#MissingDevicesGroups').empty().append(s);
 			s.length = 0;
-		}
+		}*/
 	}
 
 	function DrawTotalDevices(){
@@ -3223,7 +3224,6 @@ function ReturnBlob( data ){
 	});
 
 	$(window ).hammer( HammerOptions ).on("tap",  ".isselected", function(e){
-		alert("Tapped isSelected" + movingGroup );
 
 		var id = $(this).parent().attr("groupid");
 		if( movingGroup == false){
@@ -3243,21 +3243,6 @@ function ReturnBlob( data ){
 		setTimeout(function() {
 			movingGroup = false;
 		}, 700);
-
-		// console.log( $(this).attr("value") );
-		// var id = $(this).attr("value");
-		// id = id.substr( id.lastIndexOf(".")+1);
-		// console.log( id );
-		// for (var i = 0; i < Groups.length; i++) {
-		// 	if( Groups[i].ID_Group == id){
-
-		// 		ChangeGroup( i );
-		// 	}
-		// };
-		// setTimeout(function() {
-		// 	$('float#GroupSelect').attr("novis", "");
-		// 	Shadow.hide();
-		// }, 500);
 	});
 
 	$('#btnExtSelectCancel').hammer( HammerOptions  ).on("tap", function(event){
