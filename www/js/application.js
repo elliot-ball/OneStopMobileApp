@@ -838,7 +838,7 @@ function ReturnBlob( data ){
 								// DrawOnMapDevices();
 								OnMapFunctions.empty();
 								OnMapFunctions.MoveForward();
-								alert("Unable to download groups. Please check your connection");
+								alert("Unable to download Data. Please check your connection");
 							}
 						}else{
 							File.error(e);
