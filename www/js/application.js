@@ -1336,41 +1336,6 @@ function ReturnBlob( data ){
 		}
 	}
 
-/*$.ajax({
-	type: "POST",
-	url: ServerURL + "/GetDevices",
-	contentType: "application/json; charset=utf-8",
-	async: true,
-	data: JSON.stringify({
-		data: 1085
-	}),
-	dataType: 'json',
-	success: function( d, status, xhr ){
-		Devices = JSON.parse(d.d)
-		CurrentMap.ID_Map = 1;
-		OnMapFunctions.empty();
-		OffMapFunctions.empty();
-
-		for (var i = 0; i < Devices.length; i++) {
-			if( Devices[i].ID_Map == CurrentMap.ID_Map ){
-				OnMapDevices.push( Devices[i] );
-			}
-			if( Devices[i].ID_Map == 0 ){
-				OffMapDevices.push( Devices[i] );
-			}
-		};
-
-		OnMapDevices = SplitIntoGroups( OnMapDevices );
-		OffMapDevices = SplitIntoGroups( OffMapDevices );
-		OnMapFunctions.MoveForward();
-		OffMapFunctions.MoveForward();
-
-
-	},
-	error: function(et, e) {
-	}
-});*/
-
 	var OnMapFunctions = {
 		current: 0,
 		RootGroup: function(){
@@ -2056,6 +2021,7 @@ function ReturnBlob( data ){
 				});
 			}
 
+			alert( navigator.connection.type );
 			Connection.status = "online";
 			if( ThisDevice.Browser == true){
 				Connection.type = "WiFi";
