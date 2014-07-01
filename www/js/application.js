@@ -38,7 +38,6 @@ try{
 		oldScale: 1,
 		scale: 1,
 		matrix: null,
-
 	}
 	//Change CSS based on devcie type
 	//IOS Style
@@ -1363,7 +1362,7 @@ function ReturnBlob( data ){
 			$('#DevicesonMapGroup').empty().append(s);
 			s.length = 0;
 			OnMapFunctions.current = 0;
-		//Spinner.hide();
+		Spinner.hide();
 		},
 		NextGroup: function(){
 			var s = "";
@@ -1384,7 +1383,7 @@ function ReturnBlob( data ){
 				$('#DevicesonMapGroup>panel.group>panel.child:first-child').remove();
 			}, 700);
 			s.length = 0;
-			//Spinner.hide();
+			Spinner.hide();
 		},
 		PrevGroup: function(){
 
@@ -1406,7 +1405,7 @@ function ReturnBlob( data ){
 				$('#DevicesonMapGroup>panel.group>panel.child:first-child').remove();
 			}, 700);
 			s.length = 0;
-			//Spinner.hide();
+			Spinner.hide();
 		},
 		empty:function(){
 			OnMapFunctions.current = -1;
@@ -1415,17 +1414,17 @@ function ReturnBlob( data ){
 			console.log("Drawing");
 			$('#DevicesonMapGroup').empty().append(s);
 			s.length = 0;
-			//Spinner.hide();
+			Spinner.hide();
 		},
 		MoveForward: function(){
 			if( OnMapDevices.length > 0){
 				if( OnMapFunctions.current == -1){
-					//Spinner.show();
+					Spinner.show();
 					OnMapFunctions.RootGroup();
 				}else{
 					OnMapFunctions.current++;
 					if( OnMapFunctions.current < (OnMapDevices.length)){
-						//Spinner.show();
+						Spinner.show();
 						OnMapFunctions.NextGroup();
 						$('a.button#btnforwards_On').prev('indicator').html( OffMapFunctions.current );
 					}else{
@@ -1441,7 +1440,7 @@ function ReturnBlob( data ){
 			if( OnMapFunctions.current < 0){
 				OnMapFunctions.current = 0;
 			}else{
-				//Spinner.show();
+				Spinner.show();
 				OnMapFunctions.PrevGroup();
 				$('a.button#btnforwards_On').prev('indicator').html( OffMapFunctions.current );
 			}
@@ -1473,7 +1472,7 @@ function ReturnBlob( data ){
 			s.length = 0;
 			OffMapFunctions.current = 0;
 
-		//Spinner.hide();
+		Spinner.hide();
 		},
 		NextGroup: function(){
 			var s = "";
@@ -1494,7 +1493,7 @@ function ReturnBlob( data ){
 				$('#MissingDevicesGroups>panel.group>panel.child:first-child').remove();
 			}, 700);
 			s.length = 0;
-			//Spinner.hide();
+			Spinner.hide();
 		},
 		PrevGroup: function(){
 			var s = "";
@@ -1515,7 +1514,7 @@ function ReturnBlob( data ){
 				$('#MissingDevicesGroups>panel.group>panel.child:first-child').remove();
 			}, 700);
 			s.length = 0;
-			//Spinner.hide();
+			Spinner.hide();
 		},
 		empty:function(){
 			OffMapFunctions.current = -1;
@@ -1523,18 +1522,18 @@ function ReturnBlob( data ){
 			s += "<row class='item none' id='none'><span><name>No Devices</name><serial>This map has no devices</serial></span></row>";
 			$('#MissingDevicesGroups').empty().append(s);
 			s.length = 0;
-			//Spinner.hide();
+			Spinner.hide();
 		},
 		MoveForward: function(){
 
 			if( OffMapDevices.length > 0){
 				if( OffMapFunctions.current == -1){
-					//Spinner.show();
+					Spinner.show();
 					OffMapFunctions.RootGroup();
 				}else{
 					OffMapFunctions.current++;
 					if( OffMapFunctions.current < (OffMapDevices.length)){
-						//Spinner.show();
+						Spinner.show();
 						OffMapFunctions.NextGroup();
 						$('a.button#btnforwards_Off').prev('indicator').html( OffMapFunctions.current );
 
@@ -1551,7 +1550,7 @@ function ReturnBlob( data ){
 			if( OffMapFunctions.current < 0 ){
 				OffMapFunctions.current = 0;
 			}else{
-				//Spinner.show();
+				Spinner.show();
 				OffMapFunctions.PrevGroup();
 				$('a.button#btnforwards_Off').prev('indicator').html( OffMapFunctions.current );
 			}
