@@ -809,6 +809,7 @@ function ReturnBlob( data ){
 								Ajax.groups();
 							else
 								Spinner.hide();
+								AddMessage("Connection offline, Unable to download groups", "long", "bottom");
 								alert("Unable to download groups. Please check your connection");
 						}else{
 							File.error(e);
@@ -827,6 +828,7 @@ function ReturnBlob( data ){
 						fe.file( function( file ){
 							var r = new FileReader();
 							r.onload = function(e){
+								AddMessage("Connection offline - Reading data from this device", "short", "top");
 								if( this.result.length > 0){
 									var result = JSON.parse(this.result);
 									Settings.lastUpdate = StringMe( result.Date );
@@ -868,7 +870,8 @@ function ReturnBlob( data ){
 								// DrawOnMapDevices();
 								OnMapFunctions.empty();
 								OnMapFunctions.MoveForward();
-								alert("Unable to download Data. Please check your connection");
+								AddMessage("Connection offline, Unable to download data", "long", "bottom");
+								// alert("Unable to download Data. Please check your connection");
 							}
 						}else{
 							File.error(e);
@@ -926,7 +929,9 @@ function ReturnBlob( data ){
 							}else{
 								ReadFile.forceMissingMap();
 								Spinner.hide();
-								alert("Unable to download Map. Please check your connection");
+								AddMessage("Connection offline, Unable to download map", "long", "bottom");
+
+								// alert("Unable to download Map. Please check your connection");
 							}
 						}else{
 							File.error(e);
@@ -936,7 +941,8 @@ function ReturnBlob( data ){
 			}, File.error);
 		},
 		forceMissingMap: function( ){
-			LoadMap("../img/missing.jpg");
+
+			LoadMap("missing.jpg");
 			Spinner.hide();
 		},
 		devImg: function(e){
