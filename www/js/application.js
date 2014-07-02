@@ -939,8 +939,6 @@ function ReturnBlob( data ){
 								ReadFile.forceMissingMap();
 								Spinner.hide();
 								AddMessage("Connection offline, Unable to download map", "long", "bottom");
-
-								// alert("Unable to download Map. Please check your connection");
 							}
 						}else{
 							File.error(e);
@@ -950,7 +948,6 @@ function ReturnBlob( data ){
 			}, File.error);
 		},
 		forceMissingMap: function( ){
-
 			LoadMap("missing.jpg");
 			Spinner.hide();
 		},
@@ -1938,7 +1935,7 @@ function ReturnBlob( data ){
 							AddMessage("Cannot find Map Image", "long", "bottom");
 							setTimeout(function() {
 								ReadFile.forceMissingMap( );
-							}, 1000);
+							}, 1);
 
 						break;
 						case FileTransferError.INVALID_URL_ERR:
@@ -1948,7 +1945,7 @@ function ReturnBlob( data ){
 							AddMessage("Cannot find connection path for Map Image", "long", "bottom");
 							setTimeout(function() {
 								ReadFile.forceMissingMap( );
-							}, 1000);
+							}, 1);
 
 						break;
 						case FileTransferError.ABORT_ERR:
@@ -2786,13 +2783,9 @@ function ReturnBlob( data ){
 				}
 
 				if( DeviceAdd == true){
-
 					$('#MissingDevicesPanel').removeAttr("right").removeAttr("left").attr("open", "");
-					// $('#MissingDevicesPanel').removeAttr("right").removeAttr("left").removeAttr("open").attr("right", "");
-
 					OnMapDevices.length = 0;
 					OffMapDevices.length = 0;
-
 					for (var i = 0; i < Devices.length; i++) {
 						if( Devices[i].ID_Map == CurrentMap.ID_Map ){
 							OnMapDevices.push( Devices[i] );
@@ -2803,13 +2796,10 @@ function ReturnBlob( data ){
 					};
 					OnMapDevices = SplitIntoGroups( OnMapDevices );
 					OffMapDevices = SplitIntoGroups( OffMapDevices );
-
 					OnMapFunctions.empty();
 					OffMapFunctions.empty();
-
 					LoadOnMapDevices();
 					LoadOffMapDevices();
-
 					setTimeout(function() {
 						OnMapFunctions.MoveForward();
 						OffMapFunctions.MoveForward();
