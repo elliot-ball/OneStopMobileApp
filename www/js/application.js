@@ -774,7 +774,6 @@ function ReturnBlob( data ){
 						},File.error);
 					},
 					function(e){
-						alert( Connection.status );
 						if( e.code == 1){
 							if( Connection.status == "online" )
 								Ajax.groups();
@@ -1477,7 +1476,9 @@ function ReturnBlob( data ){
 			s.length = 0;
 			OffMapFunctions.current = 0;
 
-		Spinner.hide();
+		alert("Hide spinner now..")
+			Spinner.hide();
+
 		},
 		NextGroup: function(){
 			var s = "";
