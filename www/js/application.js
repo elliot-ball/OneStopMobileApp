@@ -1255,16 +1255,16 @@ function ReturnBlob( data ){
 		var orientRotation = window.orientation;
 		switch( orientRotation ){
 			case 0:
-				OrientPortrait();
+				OrientLandscape();
 			break;
 			case 90:
-				OrientLandscape();
-			break;
-			case 180:
 				OrientPortrait();
 			break;
-			case 270:
+			case 180:
 				OrientLandscape();
+			break;
+			case 270:
+				OrientPortrait();
 			break;
 		}
 
