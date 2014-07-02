@@ -1425,11 +1425,13 @@ function ReturnBlob( data ){
 		MoveForward: function(){
 			if( OnMapDevices.length > 0){
 				if( OnMapFunctions.current == -1){
+					Spinner.hide();
 					Spinner.show();
 					OnMapFunctions.RootGroup();
 				}else{
 					OnMapFunctions.current++;
 					if( OnMapFunctions.current < (OnMapDevices.length)){
+						Spinner.hide();
 						Spinner.show();
 						OnMapFunctions.NextGroup();
 						$('a.button#btnforwards_On').prev('indicator').html( OffMapFunctions.current );
@@ -1446,6 +1448,7 @@ function ReturnBlob( data ){
 			if( OnMapFunctions.current < 0){
 				OnMapFunctions.current = 0;
 			}else{
+				Spinner.hide();
 				Spinner.show();
 				OnMapFunctions.PrevGroup();
 				$('a.button#btnforwards_On').prev('indicator').html( OffMapFunctions.current );
