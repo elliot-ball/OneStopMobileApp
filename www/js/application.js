@@ -19,7 +19,7 @@ try{
 	ThisDevice.Browser = false;
 
 	//Set up scrolling elements
-	$.each( $('scroll.y.fill'), function(index, item){
+	$.each( $('scroll.y'), function(index, item){
 		// $(item).parent().css({
 		// 	"overflow" : "hidden",
 		// 	"width" : "100%",
