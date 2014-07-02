@@ -88,6 +88,7 @@ try{
 	//store delete information
 	var User = new Object(), Groups = new Array(), Devices = new Array(), Maps = new Array(), Changes = new Array(), Delete = new Array()
 
+	var btnAddHit = false, moving = false;
 	var DeviceChange = false, DeviceAddd = false;
 
 // // User object
@@ -3441,14 +3442,20 @@ function ReturnBlob( data ){
 	});
 
 	$('#btnAddDevices').hammer(HammerOptions).on("tap", function(e){
-		$(this).parents('panel.child').removeAttr("left").attr("left", "");
-		$('#MissingDevicesPanel').removeAttr("right").attr("open", "");
-		OffMapFunctions.empty();
-		Spinner.show();
-		LoadOffMapDevices();
-		setTimeout(function() {
-			OffMapFunctions.MoveForward();
-		}, 500);
+		if( !btnAddHit ){
+			btnAddHit = true;
+			$(this).parents('panel.child').removeAttr("left").attr("left", "");
+			$('#MissingDevicesPanel').removeAttr("right").attr("open", "");
+			OffMapFunctions.empty();
+			Spinner.show();
+			LoadOffMapDevices();
+			setTimeout(function() {
+				OffMapFunctions.MoveForward();
+			}, 500);
+			setTimeout(function() {
+				btnAddHit = false;
+			}, 700);
+		}
 	})
 
 	$('shadow').hammer( HammerOptions ).on("touch release", function(e){
@@ -3465,8 +3472,6 @@ function ReturnBlob( data ){
 
 		Shadow.hide();
 	})
-
-	var moving = false;
 	$(window).hammer(HammerOptions).on("tap", "a.button#btnforwards_Off", function(e){
 		OffMapFunctions.MoveForward();
 	});
