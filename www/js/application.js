@@ -403,6 +403,7 @@ var Ajax ={
 					console.log( s );
 					DrawChangesLog( s );
 					RemoveFile.changes();
+					Delete.length = 0;
 					setTimeout(function() {
 						WriteFile.settings();
 						WriteFile.data( );
@@ -411,8 +412,6 @@ var Ajax ={
 						setTimeout(function() {
 							OnMapDevices.length = 0;
 							OffMapDevices.length = 0;
-
-							alert( Devices.length );
 
 							for (var i = 0; i < Devices.length; i++) {
 								if( Devices[i].ID_Map == CurrentMap.ID_Map ){
@@ -2582,9 +2581,10 @@ function ReturnBlob( data ){
 	});
 
 	$('#btnBin').hammer( HammerOptions ).on("tap", function ( event ){
+		alert( Delete.length );
 		if( Delete.length > 0){
 			// AddMessage("Deleting devices", "spin")
-			AddMessage("Deleting devices", "short", "top")
+			AddMessage("Deleting devices - Remeber to save", "short", "top")
 			Spinner.show();
 
 			for (var i = 0; i < Delete.length; i++) {
