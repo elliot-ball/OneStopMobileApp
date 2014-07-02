@@ -150,16 +150,11 @@ try{
 
 	var Spinner = {
 		show: function (e){
-			// $('spinner').removeAttr("novis").addClass("start");
-			if( !ThisDevice.Browser )
-				window.plugins.spinnerDialog.hide();
-				setTimeout(function() {
-					window.plugins.spinnerDialog.show();
-				}, 1);
+			if( !ThisDevice.Browser ){
+				window.plugins.spinnerDialog.show();
+			}
 		},
 		hide: function(e){
-			// $('spinner>message').remove();
-			// $('spinner').attr("novis", "").removeClass("start");
 			if( !ThisDevice.Browser ){
 				window.plugins.spinnerDialog.hide();
 			}
@@ -1371,7 +1366,7 @@ function ReturnBlob( data ){
 			$('#DevicesonMapGroup').empty().append(s);
 			s.length = 0;
 			OnMapFunctions.current = 0;
-		Spinner.hide();
+			Spinner.hide();
 		},
 		NextGroup: function(){
 			var s = "";
@@ -1428,13 +1423,13 @@ function ReturnBlob( data ){
 		MoveForward: function(){
 			if( OnMapDevices.length > 0){
 				if( OnMapFunctions.current == -1){
-					Spinner.hid();
+					Spinner.hide();
 					Spinner.show();
 					OnMapFunctions.RootGroup();
 				}else{
 					OnMapFunctions.current++;
 					if( OnMapFunctions.current < (OnMapDevices.length)){
-						Spinner.hid();
+						Spinner.hide();
 						Spinner.show();
 						OnMapFunctions.NextGroup();
 						$('a.button#btnforwards_On').prev('indicator').html( OffMapFunctions.current );
@@ -1451,7 +1446,7 @@ function ReturnBlob( data ){
 			if( OnMapFunctions.current < 0){
 				OnMapFunctions.current = 0;
 			}else{
-				Spinner.hid();
+				Spinner.hide();
 				Spinner.show();
 				OnMapFunctions.PrevGroup();
 				$('a.button#btnforwards_On').prev('indicator').html( OffMapFunctions.current );
