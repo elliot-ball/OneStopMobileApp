@@ -2046,6 +2046,7 @@ function ReturnBlob( data ){
 
 	var PhoneGap = {
 		ready: function( event ){
+			Connection.status = "online";
 
 			Shadow.hide();
 			ResetDeviceInformation();
@@ -2067,7 +2068,6 @@ function ReturnBlob( data ){
 				});
 			}
 
-			Connection.status = "online";
 			if( ThisDevice.Browser == true){
 				Connection.type = "WiFi";
 			}else{
@@ -2110,28 +2110,22 @@ function ReturnBlob( data ){
 		online: function( event ){
 			Connection.status = "online";
 			Connection.type = navigator.connection.type;
-			alert( Connection.status );
-			// AddMessage("Device online", "network");
 			AddMessage("Device online", "short", "bottom");
 			$('#NetStatus').addClass("online").removeClass("offline");
-
 			if( Settings.logged == true  && Settings.changes == 1){
 				NotifyConfirm(
 					"Changes have been detected",
 					function( buttonIndex ){
 						if( buttonIndex == 1 ){
 							ReadFile.changes();
-							Shadow.show();
-
+							Spinner.show();
 							setTimeout(function() {
 								Ajax.changes();
 							}, 250);
 						}
-						if( buttonIndex == 2 ){
-							Changes.length = 0;
-							// File.remove.changes();
+						if( buttonIndex == 2 )
+{							Changes.length = 0;
 							RemoveFile.changes();
-
 							$('#btnDownload').trigger("tap");
 						}
 					},
@@ -2141,12 +2135,8 @@ function ReturnBlob( data ){
 			}
 		},
 		offline: function( event ){
-
 			Connection.status = "offline"
 			Connection.type = navigator.connection.type;
-			alert( Connection.status );
-
-			// AddMessage("Device offline", "error-bad");
 			AddMessage("Device offline", "short", "bottom");
 		}
 	}
