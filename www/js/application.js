@@ -2110,7 +2110,7 @@ function ReturnBlob( data ){
 		online: function( event ){
 			Connection.status = "online";
 			Connection.type = navigator.connection.type;
-			alert( Conenction.status );
+			alert( Connection.status );
 			// AddMessage("Device online", "network");
 			AddMessage("Device online", "short", "bottom");
 			$('#NetStatus').addClass("online").removeClass("offline");
@@ -2144,7 +2144,7 @@ function ReturnBlob( data ){
 
 			Connection.status = "offline"
 			Connection.type = navigator.connection.type;
-			alert( Conenction.status );
+			alert( Connection.status );
 
 			// AddMessage("Device offline", "error-bad");
 			AddMessage("Device offline", "short", "bottom");
