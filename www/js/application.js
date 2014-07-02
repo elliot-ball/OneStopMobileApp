@@ -408,22 +408,20 @@ var Ajax ={
 						WriteFile.data( );
 						AddMessage("Upload finished - Check log", "short", "top");
 
-						Spinner.show();
-
 						for (var i = 0; i < Devices.length; i++) {
 							if( Devices[i].ID_Map == CurrentMap.ID_Map ){
 								OnMapDevices.push( Devices[i] );
 							}
 						};
+						alert(" splitting onmaps into groups")
 						OnMapDevices = SplitIntoGroups( OnMapDevices );
-
+						alert("emptying ")
 						OnMapFunctions.empty();
-
+						alert(" adding loading")
 						LoadOnMapDevices();
+						alert("moving forward")
+						OnMapFunctions.MoveForward();
 
-						setTimeout(function() {
-							OnMapFunctions.MoveForward();
-						}, 100);
 
 						DrawDevicesOnMap();
 					}, 100);
