@@ -2581,7 +2581,6 @@ function ReturnBlob( data ){
 	});
 
 	$('#btnBin').hammer( HammerOptions ).on("tap", function ( event ){
-		alert( Delete.length );
 		if( Delete.length > 0){
 			// AddMessage("Deleting devices", "spin")
 			AddMessage("Deleting devices - Remeber to save", "short", "top")
@@ -2633,6 +2632,7 @@ function ReturnBlob( data ){
 			$('#deleteoptions').attr("novis", "");
 			$('#deleteoptions').prev().removeAttr("novis");
 			$('#btnBinSelected').html(" 0 ");
+			Delete.length = 0;
 		}else{
 			AddMessage("Nothing to delete", "short", "top")
 		}
