@@ -1,7 +1,7 @@
 Zepto(function($){
 try{
 
-	// window.onorientationchange = orientationFix;
+	window.onorientationchange = orientationFix;
 
 	var AppStarted = false;
 	//Object holding Users Device information
@@ -1270,7 +1270,7 @@ function ReturnBlob( data ){
 
 		function OrientPortrait(e){
 			try{
-				$(document.body).removeAttr("landscape").attr("portrait", "");
+				$('page').removeAttr("landscape").attr("portrait", "");
 			}catch(e){
 				alert( "OrientERRROR: " + e.toString() );
 			}
@@ -1280,11 +1280,10 @@ function ReturnBlob( data ){
 				$('map>viewport').removeAttr("novis")
 				ResizeMap();
 			}, 100);
-			alert("rotated");
 		}
 		function OrientLandscape(e){
 			try{
-				$(document.body).removeAttr("portrait").attr("landscape", "")
+				$('page').removeAttr("portrait").attr("landscape", "")
 			}catch(e){
 				alert( "OrientERRROR: " + e.toString() );
 			}
@@ -1294,7 +1293,6 @@ function ReturnBlob( data ){
 				$('map>viewport').removeAttr("novis")
 				ResizeMap();
 			}, 100);
-			alert("rotated");
 		}
 	}
 
@@ -2493,7 +2491,7 @@ function ReturnBlob( data ){
 	document.addEventListener("resume", PhoneGap.resume, false);
 	document.addEventListener("online", PhoneGap.online, false);
 	document.addEventListener("offline", PhoneGap.offline, false);
-	window.addEventListener("orientationchange", orientationFix, false);
+	// window.addEventListener("orientationchange", orientationFix, false);
 
 	var HammerOptions = {
 		preventMouse:true,

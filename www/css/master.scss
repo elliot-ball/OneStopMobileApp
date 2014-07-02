@@ -39,7 +39,7 @@ body{
 	white-space: nowrap;
 
 }
-body[landscape]{
+page[landscape]{
 	panel.master>swipe{
 		width: 20px;
 		-webkit-box-ordinal-group: 2;
@@ -65,7 +65,8 @@ body[landscape]{
 
 	}
 }
-body[portrait]{
+
+page[portrait]{
 	panel.master>swipe{
 		height: 20px;
 		-webkit-box-ordinal-group: 1;

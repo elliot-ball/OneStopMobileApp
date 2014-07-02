@@ -41,67 +41,67 @@ body {
   white-space: nowrap;
 }
 
-body[landscape] panel.master > swipe {
+page[landscape] panel.master > swipe {
   width: 20px;
   -webkit-box-ordinal-group: 2;
   -webkit-box-orient: vertical;
 }
-body[landscape] panel.in {
+page[landscape] panel.in {
   width: 0px;
 }
-body[landscape] panel.out {
+page[landscape] panel.out {
   width: 100%;
 }
-body[landscape] #informationPanel row.content {
+page[landscape] #informationPanel row.content {
   -webkit-box-orient: vertical;
   -webkit-box-flex: 1;
   -webkit-box-pack: start;
   -webkit-box-align: stretch;
 }
-body[landscape] #informationPanel scroll {
+page[landscape] #informationPanel scroll {
   -webkit-box-flex: 0;
 }
 
-body[portrait] panel.master > swipe {
+page[portrait] panel.master > swipe {
   height: 20px;
   -webkit-box-ordinal-group: 1;
   -webkit-box-orient: horizontal;
   border-bottom: 1px solid;
 }
-body[portrait] panel.master > swipe:after {
+page[portrait] panel.master > swipe:after {
   -webkit-transform: rotate(270deg);
 }
-body[portrait] #MapsMasterPanel {
+page[portrait] #MapsMasterPanel {
   -webkit-box-orient: horizontal;
 }
-body[portrait] #MapsMasterPanel row.master {
+page[portrait] #MapsMasterPanel row.master {
   -webkit-box-pack: start;
 }
-body[portrait] #MapsMasterPanel row.master:first-of-type {
+page[portrait] #MapsMasterPanel row.master:first-of-type {
   border-right: 1px solid;
 }
-body[portrait] #MapsMasterPanel row.master:not(:first-of-type) {
+page[portrait] #MapsMasterPanel row.master:not(:first-of-type) {
   border-top: 0;
 }
-body[portrait] content {
+page[portrait] content {
   -webkit-box-orient: vertical;
 }
-body[portrait] content panel.master {
+page[portrait] content panel.master {
   -webkit-box-orient: vertical;
   -webkit-box-ordinal-group: 2;
   -webkit-box-flex: 0;
   max-width: 100%;
   width: 100%;
 }
-body[portrait] content panel.master.in {
+page[portrait] content panel.master.in {
   height: 100%;
   max-height: 20px;
 }
-body[portrait] content panel.master.out {
+page[portrait] content panel.master.out {
   max-height: 50%;
   height: 100%;
 }
-body[portrait] content map {
+page[portrait] content map {
   -webkit-box-flex: 1;
   -webkit-box-ordinal-group: 1;
   min-height: 50%;
@@ -109,11 +109,11 @@ body[portrait] content map {
   border-bottom: 1px solid;
   height: 0;
 }
-body[portrait] content #DevicesOnMapPanel, body[portrait] content #MissingDevicesPanel {
+page[portrait] content #DevicesOnMapPanel, page[portrait] content #MissingDevicesPanel {
   border-right: 0;
   -webkit-box-orient: vertical;
 }
-body[portrait] content #informationPanel row.content {
+page[portrait] content #informationPanel row.content {
   -webkit-box-orient: horizontal;
   -webkit-box-flex: 1;
   -webkit-box-pack: center;
