@@ -88,7 +88,7 @@ try{
 	//store delete information
 	var User = new Object(), Groups = new Array(), Devices = new Array(), Maps = new Array(), Changes = new Array(), Delete = new Array()
 
-	var DeviceChange = false;
+	var DeviceChange = false, DeviceAddd = false;
 
 // // User object
 // 	var User =  new Object();
@@ -1074,7 +1074,8 @@ function ReturnBlob( data ){
 	}
 
 	function AddDeviceOnMap( x, y){
-		DeviceChange = true;
+		DeviceAdd = true;
+
 		OnMapFunctions.empty();
 		OffMapFunctions.empty();
 
@@ -2563,16 +2564,6 @@ function ReturnBlob( data ){
 			// Map.drawDevices();
 			// File.write.data();
 			WriteFile.data();
-
-			OnMapDevices.length = 0;
-			OffMapDevices.length = 0;
-
-
-
-
-
-			// DrawAvalibleDevices();
-
 			OnMapDevices.length = 0;
 			OffMapDevices.length = 0;
 
@@ -2721,7 +2712,26 @@ function ReturnBlob( data ){
 				$('#DevicesOnMapPanel').removeAttr("right").removeAttr("left").attr("open", "");
 				$('#MissingDevicesPanel').removeAttr("right").removeAttr("left").removeAttr("open").attr("right", "");
 
-				if( DeviceChange == true){
+				if( DeviceChange == true ){
+					OnMapDevices.length = 0;
+
+					for (var i = 0; i < Devices.length; i++) {
+						if( Devices[i].ID_Map == CurrentMap.ID_Map ){
+							OnMapDevices.push( Devices[i] );
+						}
+					}
+					OnMapDevices = SplitIntoGroups( OnMapDevices );
+					OnMapFunctions.empty();
+					LoadOnMapDevices();
+
+					setTimeout(function() {
+						OnMapFunctions.MoveForward();
+					}, 100);
+
+					DeviceChange = true;
+				}
+
+				if( DeviceAdd == true){
 					OnMapDevices.length = 0;
 					OffMapDevices.length = 0;
 
@@ -2745,8 +2755,7 @@ function ReturnBlob( data ){
 					setTimeout(function() {
 						OnMapFunctions.MoveForward();
 					}, 100);
-
-					DeviceChange = true;
+					DeviceAdd = true;
 				}
 			}
 			if( $(this).parents('panel.child').attr("id") == "DevicesOnMapPanel"){
