@@ -867,6 +867,12 @@ a{
 			content: "\f014";
 		}
 	}
+	&.clear{
+		&:after{
+		font-family: "FontAwesome";
+			content: "\f014";
+		}
+	}
 	&.log{
 		&:after{
 		font-family: "FontAwesome";

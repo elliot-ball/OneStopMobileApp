@@ -407,7 +407,7 @@ var Ajax ={
 						WriteFile.settings();
 						WriteFile.data();
 						Spinner.hide();
-						AddMessage("Upload successful", "short", "top");
+						AddMessage("Upload finished - Check log", "short", "top");
 					}, 100);
 				},
 				error: function( et, e ){
@@ -2548,8 +2548,12 @@ function ReturnBlob( data ){
 			// AddMessage("Device offline. Unable to download data", "error-bad")
 			AddMessage("Device offline. Unable to download data", "long", "center")
 		}
-
 	});
+
+	$('#btnClearLog').hammer(HammerOptions).on("tap", function(event){
+		$('#logbookLog').empty();
+	});
+
 	$('#btnBin').hammer( HammerOptions ).on("tap", function ( event ){
 		if( Delete.length > 0){
 			// AddMessage("Deleting devices", "spin")
@@ -2797,6 +2801,8 @@ function ReturnBlob( data ){
 
 	$(window).hammer( HammerOptions ).on("tap",".map", function ( event ){
 		if( maptapped == false){
+			Spinner.show();
+
 			maptapped = true;
 
 			var id = $(this).attr("id");
@@ -2822,7 +2828,6 @@ function ReturnBlob( data ){
 					}
 				};
 
-				Spinner.show();
 				DrawTitle();
 
 				// DrawAvalibleDevices();
