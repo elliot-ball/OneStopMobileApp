@@ -1268,10 +1268,8 @@ function ReturnBlob( data ){
 		}
 
 		function OrientPortrait(e){
-			alert( "Rotating for " + e );
-			console.log("portrait");
-			$(document.body).addClass("portrait").removeClass("landscape");
-			('map>viewport').attr("novis", "");
+			$(document.body).removeAttr("landscape").attr("portrait", "");
+			$('map>viewport').attr("novis", "");
 			ClearDevices();
 			setTimeout(function() {
 				$('map>viewport').removeAttr("novis")
@@ -1279,10 +1277,8 @@ function ReturnBlob( data ){
 			}, 100);
 		}
 		function OrientLandscape(e){
-			alert( "Rotating for " + e );
-			console.log("landscape");
-			$(document.body).addClass("landscape").removeClass("portrait");
-			('map>viewport').attr("novis", "");
+			$(document.body).removeAttr("portrait").attr("landscape", "")
+			$('map>viewport').attr("novis", "");
 			ClearDevices();
 			setTimeout(function() {
 				$('map>viewport').removeAttr("novis")
