@@ -157,7 +157,6 @@ try{
 			// $('spinner>message').remove();
 			// $('spinner').attr("novis", "").removeClass("start");
 			if( !ThisDevice.Browser ){
-				alert("Hide spinner now..")
 				window.plugins.spinnerDialog.hide();
 			}
 		}
@@ -1477,7 +1476,9 @@ function ReturnBlob( data ){
 			$('#MissingDevicesGroups').empty().append(s);
 			s.length = 0;
 			OffMapFunctions.current = 0;
-			Spinner.hide();
+			setTimeout(function() {
+				Spinner.hide();
+			}, 10);
 		},
 		NextGroup: function(){
 			var s = "";
