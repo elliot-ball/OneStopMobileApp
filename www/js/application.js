@@ -2779,6 +2779,9 @@ function ReturnBlob( data ){
 					}, 100);
 
 					DeviceChange = true;
+				}else{
+					$('#DevicesOnMapPanel').removeAttr("right").removeAttr("left").attr("open", "");
+					$('#MissingDevicesPanel').removeAttr("right").removeAttr("left").removeAttr("open").attr("right", "");
 				}
 
 				if( DeviceAdd == true){
@@ -2810,6 +2813,9 @@ function ReturnBlob( data ){
 						OnMapFunctions.MoveForward();
 					}, 100);
 					DeviceAdd = true;
+				}else{
+					$('#DevicesOnMapPanel').removeAttr("right").removeAttr("left").attr("open", "");
+					$('#MissingDevicesPanel').removeAttr("right").removeAttr("left").removeAttr("open").attr("right", "");
 				}
 			}
 			if( $(this).parents('panel.child').attr("id") == "DevicesOnMapPanel"){
