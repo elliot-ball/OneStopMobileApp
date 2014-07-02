@@ -1478,7 +1478,7 @@ function ReturnBlob( data ){
 			OffMapFunctions.current = 0;
 			setTimeout(function() {
 					window.plugins.spinnerDialog.hide();
-			}, 1);
+			}, 100);
 		},
 		NextGroup: function(){
 			var s = "";
