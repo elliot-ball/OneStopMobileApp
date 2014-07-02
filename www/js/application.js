@@ -2514,27 +2514,6 @@ function ReturnBlob( data ){
 	$('#btnDownload').hammer( HammerOptions ).on("tap", function ( event ){
 		$('#MapTitle').empty().html("OneStop");
 		if( Connection.status == "online"){
-			Spinner.show();
-
-			// AddMessage("Downloading data", "spin start")
-			ClearMap();
-			ClearDevices();
-
-			Spinner.show();
-
-			CurrentMap.length = 0;
-			MapImage = false;
-			CurrentDevice = 0;
-			Maps.length = 0;
-			Devices.length = 0;
-			Changes.length = 0;
-			Delete.length = 0;
-
-			$('li.button.remove').removeClass("remove");
-			// $('#btnBin').parents('.master').attr("novis", "");
-
-			$('#deleteoptions').attr("novis", "");
-			$('#deleteoptions').prev().removeAttr("novis");
 
 			$('#MapsMasterPanel').removeAttr("left").removeAttr("right").attr("open", "");
 			$('#DevicesOnMapPanel').removeAttr("open").removeAttr("left").removeAttr("right").attr("left", "");
@@ -2543,6 +2522,24 @@ function ReturnBlob( data ){
 
 			$('map>viewport>pog.selecteddevice').removeClass("selecteddevice");
 			$('#MapsMasterPanel').removeAttr("right").attr("open", "");
+
+			ClearMap();
+			ClearDevices();
+
+			Spinner.show();
+
+			CurrentMap = 0;
+			CurrentDevice = 0;
+			Maps.length = 0;
+			Devices.length = 0;
+			Changes.length = 0;
+			Delete.length = 0;
+
+			$('li.button.remove').removeClass("remove");
+			// $('#btnBin').parents('.master').attr("novis", "");
+			$('#deleteoptions').attr("novis", "");
+			$('#deleteoptions').prev().removeAttr("novis");
+
 
 			Ajax.maps();
 		}else{
