@@ -39,7 +39,7 @@ body{
 	white-space: nowrap;
 
 }
-page.portrait{
+page.landscape{
 	panel.master>swipe{
 		width: 20px;
 		-webkit-box-ordinal-group: 2;
@@ -66,7 +66,7 @@ page.portrait{
 	}
 }
 
-page.landscape{
+page.portrait{
 	panel.master>swipe{
 		height: 20px;
 		-webkit-box-ordinal-group: 1;
@@ -81,6 +81,8 @@ page.landscape{
 		-webkit-box-orient: horizontal;
 		row.master{
 			-webkit-box-pack: start;
+			-webkit-box-flex: 1;
+
 			&:first-of-type{
 				border-right: 1px solid;
 			}
