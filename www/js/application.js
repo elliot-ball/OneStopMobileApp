@@ -1,7 +1,7 @@
 Zepto(function($){
 try{
 
-	window.onorientationchange = orientationFix;
+	// window.onorientationchange = orientationFix;
 
 	var AppStarted = false;
 	//Object holding Users Device information
@@ -1250,8 +1250,10 @@ function ReturnBlob( data ){
 		}
 	}
 
+
 	function orientationFix(e){
 		var orientRotation = window.orientation;
+		alert("orientation");
 		switch( orientRotation ){
 			case 0:
 				OrientPortrait();
@@ -1268,7 +1270,11 @@ function ReturnBlob( data ){
 		}
 
 		function OrientPortrait(e){
-			$(document.body).removeAttr("landscape").attr("portrait", "");
+			try{
+				$(document.body).removeAttr("landscape").attr("portrait", "");
+			}catch(e){
+				alert( "OrientERRROR: " + e.toString() );
+			}
 			$('map>viewport').attr("novis", "");
 			ClearDevices();
 			setTimeout(function() {
@@ -1277,7 +1283,11 @@ function ReturnBlob( data ){
 			}, 100);
 		}
 		function OrientLandscape(e){
-			$(document.body).removeAttr("portrait").attr("landscape", "")
+			try{
+				$(document.body).removeAttr("portrait").attr("landscape", "")
+			}catch(e){
+				alert( "OrientERRROR: " + e.toString() );
+			}
 			$('map>viewport').attr("novis", "");
 			ClearDevices();
 			setTimeout(function() {
@@ -2482,7 +2492,7 @@ function ReturnBlob( data ){
 	document.addEventListener("resume", PhoneGap.resume, false);
 	document.addEventListener("online", PhoneGap.online, false);
 	document.addEventListener("offline", PhoneGap.offline, false);
-
+	window.addEventListener("orientationchange", orientationFix, false);
 
 	var HammerOptions = {
 		preventMouse:true,
