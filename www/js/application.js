@@ -1270,7 +1270,7 @@ function ReturnBlob( data ){
 
 		function OrientPortrait(e){
 			try{
-				$('page').removeAttr("landscape").attr("portrait", "");
+				$('page').removeClass("landscape").addClass("portrait", "");
 			}catch(e){
 				alert( "OrientERRROR: " + e.toString() );
 			}
@@ -1283,7 +1283,8 @@ function ReturnBlob( data ){
 		}
 		function OrientLandscape(e){
 			try{
-				$('page').removeAttr("portrait").attr("landscape", "")
+				$('page').removeClass("portrait").addClass("landscape", "")
+
 			}catch(e){
 				alert( "OrientERRROR: " + e.toString() );
 			}
