@@ -1428,11 +1428,13 @@ function ReturnBlob( data ){
 		MoveForward: function(){
 			if( OnMapDevices.length > 0){
 				if( OnMapFunctions.current == -1){
+					Spinner.hid();
 					Spinner.show();
 					OnMapFunctions.RootGroup();
 				}else{
 					OnMapFunctions.current++;
 					if( OnMapFunctions.current < (OnMapDevices.length)){
+						Spinner.hid();
 						Spinner.show();
 						OnMapFunctions.NextGroup();
 						$('a.button#btnforwards_On').prev('indicator').html( OffMapFunctions.current );
@@ -1449,6 +1451,7 @@ function ReturnBlob( data ){
 			if( OnMapFunctions.current < 0){
 				OnMapFunctions.current = 0;
 			}else{
+				Spinner.hid();
 				Spinner.show();
 				OnMapFunctions.PrevGroup();
 				$('a.button#btnforwards_On').prev('indicator').html( OffMapFunctions.current );
@@ -1536,11 +1539,13 @@ function ReturnBlob( data ){
 
 			if( OffMapDevices.length > 0){
 				if( OffMapFunctions.current == -1){
+					Spinner.hide();
 					Spinner.show();
 					OffMapFunctions.RootGroup();
 				}else{
 					OffMapFunctions.current++;
 					if( OffMapFunctions.current < (OffMapDevices.length)){
+						Spinner.hide();
 						Spinner.show();
 						OffMapFunctions.NextGroup();
 						$('a.button#btnforwards_Off').prev('indicator').html( OffMapFunctions.current );
@@ -1558,6 +1563,7 @@ function ReturnBlob( data ){
 			if( OffMapFunctions.current < 0 ){
 				OffMapFunctions.current = 0;
 			}else{
+				Spinner.hide();
 				Spinner.show();
 				OffMapFunctions.PrevGroup();
 				$('a.button#btnforwards_Off').prev('indicator').html( OffMapFunctions.current );
