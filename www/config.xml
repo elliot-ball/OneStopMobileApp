@@ -27,7 +27,7 @@
 <preference name="phonegap-version" value="3.4.0" />
 <preference name="webviewbounce" value="true" />
 <preference name="target-device" value="tablet" />
-<preference name="Fullscreen" value="false" />
+<preference name="Fullscreen" value="true" />
 <preference name="Orientation" value="landscape" />
 <preference name="WebViewBounce" value="true" />
 <preference name="ios-statusbarstyle" value="black-opaque"/>
@@ -46,7 +46,7 @@
 <preference name="LoadUrlTimeoutValue" value="10000"/>
 <preference name="SplashScreenDelay" value="10000"/>
 <preference name="InAppBrowserStorageEnabled" value="true"/>
-<preference name="ShowTitle" value="false"/>
+<!-- <preference name="ShowTitle" value="false"/> -->
 
 <!-- IOS -->
 <preference name="detect-data-types" value="false" />

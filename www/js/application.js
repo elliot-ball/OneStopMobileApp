@@ -2554,6 +2554,7 @@ function ReturnBlob( data ){
 		if( Delete.length > 0){
 			// AddMessage("Deleting devices", "spin")
 			AddMessage("Deleting devices", "short", "top")
+			Spinner.show();
 
 			for (var i = 0; i < Delete.length; i++) {
 				for (var n = 0; n < Devices.length; n++) {
@@ -2601,8 +2602,9 @@ function ReturnBlob( data ){
 			$('#deleteoptions').attr("novis", "");
 			$('#deleteoptions').prev().removeAttr("novis");
 			$('#btnBinSelected').html(" 0 ");
+		}else{
+			AddMessage("Nothing to delete", "short", "top")
 		}
-		AddMessage("Nothing to delete", "short", "top")
 	});
 
 	$('map>viewport>img').hammer( HammerOptions ).on("touch", function(event){
