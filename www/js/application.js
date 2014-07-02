@@ -1,5 +1,8 @@
 Zepto(function($){
 try{
+
+	window.onorientationchange = orientationFix;
+
 	var AppStarted = false;
 	//Object holding Users Device information
 	var ThisDevice= {
@@ -1265,8 +1268,8 @@ function ReturnBlob( data ){
 		}
 
 		function OrientPortrait(e){
+			alert( "Rotating for " + e );
 			console.log("portrait");
-			ResizeDeviceImage();
 			$(document.body).addClass("portrait").removeClass("landscape");
 			('map>viewport').attr("novis", "");
 			ClearDevices();
@@ -1276,6 +1279,7 @@ function ReturnBlob( data ){
 			}, 100);
 		}
 		function OrientLandscape(e){
+			alert( "Rotating for " + e );
 			console.log("landscape");
 			$(document.body).addClass("landscape").removeClass("portrait");
 			('map>viewport').attr("novis", "");
@@ -2483,11 +2487,6 @@ function ReturnBlob( data ){
 	document.addEventListener("online", PhoneGap.online, false);
 	document.addEventListener("offline", PhoneGap.offline, false);
 
-
-	$(document).on("orientation", function(){
-		console.log("rotated");
-	})
-	window.onorientationchange = orientationFix;
 
 	var HammerOptions = {
 		preventMouse:true,
