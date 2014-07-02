@@ -152,23 +152,6 @@ content{
 	-webkit-box-direction: normal;
 	height: auto;
 }
-#iframeViewport{
-	display: -webkit-box;
-	box-sizing: border-box;
-	-webkit-box-flex: 1;
-	-webkit-box-flex-group:1;
-	-webkit-box-align: stretch;
-	-webkit-box-pack: start;
-	-webkit-box-direction: normal;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-	margin: 0;
-	-webkit-appearance: none;
-	border: 0;
-	overflow: hidden;
-	overflow-y: scroll;
-	overflow-x: scroll;
-}
 map{
 	display: -webkit-box;
 	box-sizing: border-box;
@@ -191,6 +174,7 @@ viewport{
 	img{
 		position: relative;
 		left: -1px;
+		top: -1px;
 		border: 1px solid rgba(black, 0.2);
 		-webkit-transform: matrix(1,0,0,1,0,0);
 	}

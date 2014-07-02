@@ -162,10 +162,7 @@ row.back a {
   border: 0;
   width: 100%;
   -webkit-box-pack: center;
-  padding: 10px 10px 10px 10px;
-}
-row.back a:before {
-  left: -10px;
+  padding: 10px;
 }
 
 row.content {
