@@ -1253,7 +1253,6 @@ function ReturnBlob( data ){
 
 	function orientationFix(e){
 		var orientRotation = window.orientation;
-		alert("orientation");
 		switch( orientRotation ){
 			case 0:
 				OrientPortrait();
@@ -1281,6 +1280,7 @@ function ReturnBlob( data ){
 				$('map>viewport').removeAttr("novis")
 				ResizeMap();
 			}, 100);
+			alert("rotated");
 		}
 		function OrientLandscape(e){
 			try{
@@ -1294,6 +1294,7 @@ function ReturnBlob( data ){
 				$('map>viewport').removeAttr("novis")
 				ResizeMap();
 			}, 100);
+			alert("rotated");
 		}
 	}
 
