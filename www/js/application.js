@@ -1255,20 +1255,25 @@ function ReturnBlob( data ){
 		var orientRotation = window.orientation;
 		switch( orientRotation ){
 			case 0:
+				alert("landscape 0")
 				OrientLandscape();
 			break;
 			case 90:
+				alert("portrait 90")
 				OrientPortrait();
 			break;
 			case 180:
+				alert("landscape 180")
 				OrientLandscape();
 			break;
 			case 270:
+				alert("portrait 270")
 				OrientPortrait();
 			break;
 		}
 
 		function OrientPortrait(e){
+
 			try{
 				$('page').removeClass("landscape").addClass("portrait", "");
 			}catch(e){
