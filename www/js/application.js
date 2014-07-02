@@ -837,7 +837,7 @@ function ReturnBlob( data ){
 						fe.file( function( file ){
 							var r = new FileReader();
 							r.onload = function(e){
-								AddMessage("Connection offline - Reading data from this device", "short", "top");
+								AddMessage("Reading data from this device", "short", "top");
 								if( this.result.length > 0){
 									var result = JSON.parse(this.result);
 									Settings.lastUpdate = StringMe( result.Date );
@@ -2812,6 +2812,7 @@ function ReturnBlob( data ){
 
 					setTimeout(function() {
 						OnMapFunctions.MoveForward();
+						OffMapFunctions.MoveForward();
 					}, 100);
 					DeviceAdd = true;
 				}else{
