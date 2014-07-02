@@ -2108,8 +2108,9 @@ function ReturnBlob( data ){
 			navigator.splashscreen.hide();
 		},
 		online: function( event ){
-			Connection.status = "online"
+			Connection.status = "online";
 			Connection.type = navigator.connection.type;
+			alert( Conenction.status );
 			// AddMessage("Device online", "network");
 			AddMessage("Device online", "short", "bottom");
 			$('#NetStatus').addClass("online").removeClass("offline");
@@ -2143,10 +2144,10 @@ function ReturnBlob( data ){
 
 			Connection.status = "offline"
 			Connection.type = navigator.connection.type;
+			alert( Conenction.status );
+
 			// AddMessage("Device offline", "error-bad");
 			AddMessage("Device offline", "short", "bottom");
-			$('#NetStatus').addClass("offline").removeClass("online");
-
 		}
 	}
 
