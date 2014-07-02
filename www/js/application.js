@@ -9,7 +9,11 @@ try{
 		Browser: false
 	}
 	// Holds somehting about the connection status of the app
-	var Connection = new Object();
+	var Connection = {
+		status: "offline",
+		type: "none",
+		online: false,
+	}
 
 	//For testing on PC-Browser
 	ThisDevice.Browser = false;
@@ -43,6 +47,11 @@ try{
 	//IOS Style
 	if( ThisDevice.IOS ){
 		$('#deviceStyle').attr("href", "css/ios.css");
+			if( parseFloat( ThisDevice.Version ) >= 7 ){
+				$('page').css({
+					"padding-top" : "20px",
+				});
+			}
 	}
 	//Android Style
 	if( ThisDevice.Android ){
@@ -542,7 +551,7 @@ var Ajax ={
 								////
 
 								fe.copyTo( destination, name, function( ){
-									if(Connection.status == "online"){
+									if(GetConnection() == true ){
 										try{
 											var imgUrl = ServerURL+"/SaveImage";
 											var options = new FileUploadOptions();
@@ -805,7 +814,7 @@ function ReturnBlob( data ){
 					},
 					function(e){
 						if( e.code == 1){
-							if( Connection.status == "online" )
+							if( GetConnection() == true )
 								Ajax.groups();
 							else
 								Spinner.hide();
@@ -860,7 +869,7 @@ function ReturnBlob( data ){
 						},File.error);
 					},function(e){
 						if( e.code == 1){
-							if( Connection.status == "online" ){
+							if( GetConnection() == true ){
 								Ajax.maps()
 ;							}else{
 								Spinner.hide();
@@ -924,7 +933,7 @@ function ReturnBlob( data ){
 						LoadMap( fileURL );
 					},function(e){
 						if( e.code == 1){
-							if( Connection.status == "online" ){
+							if( GetConnection() == true ){
 								Download.map( map, fullpath);
 							}else{
 								ReadFile.forceMissingMap();
@@ -955,7 +964,7 @@ function ReturnBlob( data ){
 						DeviceImage.loadImage( fileURL );
 					},function(e){
 						if( e.code == 1){
-							if( Connection.status == "online" ){
+							if( GetConnection() == true ){
 								Download.devimg( devimg, fullpath);
 							}else{
 								Spinner.hide();
@@ -2046,6 +2055,7 @@ function ReturnBlob( data ){
 
 	var PhoneGap = {
 		ready: function( event ){
+			Connection.online = true;
 			Connection.status = "online";
 
 			Shadow.hide();
@@ -2061,12 +2071,6 @@ function ReturnBlob( data ){
 			// DrawOffMapDevices();
 			DrawDate()
 			DrawTitle()
-
-			if( ThisDevice.IOS && parseFloat( ThisDevice.Version ) >= 7 ){
-				$('page').css({
-					"padding-top" : "20px",
-				});
-			}
 
 			if( ThisDevice.Browser == true){
 				Connection.type = "WiFi";
@@ -2108,6 +2112,7 @@ function ReturnBlob( data ){
 			navigator.splashscreen.hide();
 		},
 		online: function( event ){
+			Connection.online = true;
 			Connection.status = "online";
 			Connection.type = navigator.connection.type;
 			AddMessage("Device online", "short", "bottom");
@@ -2135,10 +2140,15 @@ function ReturnBlob( data ){
 			}
 		},
 		offline: function( event ){
+			Connection.online = false;
 			Connection.status = "offline"
 			Connection.type = navigator.connection.type;
 			AddMessage("Device offline", "short", "bottom");
 		}
+	}
+
+	function GetConnection(){
+		return Connection.online;
 	}
 
 	function ChangeInformation( result, attribute ){
@@ -2504,7 +2514,7 @@ function ReturnBlob( data ){
 		else{
 			Spinner.show();
 
-			if( Connection.status == "online"){
+			if( GetConnection() == true){
 				var u = $('#inputUsername').val(), p = $('#inputPassword').val();
 				setTimeout(function() {
 					AjaxUserLogin( u, p);
@@ -2523,7 +2533,7 @@ function ReturnBlob( data ){
 			AddMessage("Loading Groups", "short", "top");
 			Spinner.show();
 
-			if( Connection.status == "online"){
+			if( GetConnection() == true ){
 				LoginPage.hide();
 
 				Ajax.groups();
@@ -2540,7 +2550,7 @@ function ReturnBlob( data ){
 
 	$('#btnDownload').hammer( HammerOptions ).on("tap", function ( event ){
 		$('#MapTitle').empty().html("OneStop");
-		if( Connection.status == "online"){
+		if( GetConnection() == true){
 
 			$('#MapsMasterPanel').removeAttr("left").removeAttr("right").attr("open", "");
 			$('#DevicesOnMapPanel').removeAttr("open").removeAttr("left").removeAttr("right").attr("left", "");
@@ -2641,7 +2651,7 @@ function ReturnBlob( data ){
 
 	$('#btnSave').hammer( HammerOptions ).on("tap", function ( event ){
 		if( Changes.length > 0){
-			if(Connection.status == "online"){
+			if(GetConnection() == true ){
 
 				// MessageSpinner.show("Uploading", "Sending changes to the server");
 				// Addmessage("Saving changes to server.", "spin start")
