@@ -1476,9 +1476,7 @@ function ReturnBlob( data ){
 			$('#MissingDevicesGroups').empty().append(s);
 			s.length = 0;
 			OffMapFunctions.current = 0;
-			setTimeout(function() {
-					window.plugins.spinnerDialog.hide();
-			}, 100);
+			Spinner.hide();
 		},
 		NextGroup: function(){
 			var s = "";
@@ -1534,11 +1532,13 @@ function ReturnBlob( data ){
 
 			if( OffMapDevices.length > 0){
 				if( OffMapFunctions.current == -1){
+					Spinner.hide();
 					Spinner.show();
 					OffMapFunctions.RootGroup();
 				}else{
 					OffMapFunctions.current++;
 					if( OffMapFunctions.current < (OffMapDevices.length)){
+						Spinner.hide();
 						Spinner.show();
 						OffMapFunctions.NextGroup();
 						$('a.button#btnforwards_Off').prev('indicator').html( OffMapFunctions.current );
@@ -1556,6 +1556,7 @@ function ReturnBlob( data ){
 			if( OffMapFunctions.current < 0 ){
 				OffMapFunctions.current = 0;
 			}else{
+				Spinner.hide();
 				Spinner.show();
 				OffMapFunctions.PrevGroup();
 				$('a.button#btnforwards_Off').prev('indicator').html( OffMapFunctions.current );
