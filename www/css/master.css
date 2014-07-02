@@ -1085,9 +1085,13 @@ float.end {
   width: 100%;
   -webkit-box-flex: 0;
   -webkit-box-flex-group: 1;
-  -webkit-box-align: stretch;
-  -webkit-box-pack: start;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
   -webkit-box-direction: normal;
+}
+float.end a.button {
+  min-width: 100px;
+  max-width: 200px;
 }
 float[novis] {
   visibility: hidden;

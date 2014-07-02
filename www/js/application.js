@@ -2550,10 +2550,6 @@ function ReturnBlob( data ){
 		}
 	});
 
-	$('#btnClearLog').hammer(HammerOptions).on("tap", function(event){
-		$('#logbookLog').empty();
-	});
-
 	$('#btnBin').hammer( HammerOptions ).on("tap", function ( event ){
 		if( Delete.length > 0){
 			// AddMessage("Deleting devices", "spin")
@@ -3437,7 +3433,7 @@ function ReturnBlob( data ){
 	});
 
 	$('#btnClearLog').hammer(HammerOptions).on("tap", function(event){
-		alert("i WILL clear this log. but for now im am a tree.")
+		$('#logbookLog').empty();
 	})
 
 	$('#inputUsername, #inputPassword').on("focus blur", function ( event ){
