@@ -173,7 +173,7 @@ viewport[novis] {
 viewport img {
   position: relative;
   left: -1px;
-  top: -1px;
+  top: -0.5px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   -webkit-transform: matrix(1, 0, 0, 1, 0, 0);
 }

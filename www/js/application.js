@@ -1477,13 +1477,8 @@ function ReturnBlob( data ){
 			s.length = 0;
 			OffMapFunctions.current = 0;
 			setTimeout(function() {
-				Spinner.hide();
-			}, 10);
-
-			setTimeout(function() {
-				alert("waited 5 seconds, force hide now");
 					window.plugins.spinnerDialog.hide();
-			}, 5000);
+			}, 1);
 		},
 		NextGroup: function(){
 			var s = "";
