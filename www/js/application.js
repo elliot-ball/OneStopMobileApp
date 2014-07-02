@@ -88,6 +88,7 @@ try{
 	//store delete information
 	var User = new Object(), Groups = new Array(), Devices = new Array(), Maps = new Array(), Changes = new Array(), Delete = new Array()
 
+	var DeviceChange = false;
 
 // // User object
 // 	var User =  new Object();
@@ -1073,6 +1074,10 @@ function ReturnBlob( data ){
 	}
 
 	function AddDeviceOnMap( x, y){
+		DeviceChange = true;
+		OnMapFunctions.empty();
+		OffMapFunctions.empty();
+
 		var d = '';
 		var offset = $('map').position();
 		x -= parseFloat( offset.left);
@@ -1110,6 +1115,7 @@ function ReturnBlob( data ){
 
 		setTimeout(function() {
 			// DrawAvalibleDevices();
+
 			DrawDevicesOnMap();
 
 			CurrentDevice = GetDevice( id );
@@ -1120,8 +1126,8 @@ function ReturnBlob( data ){
 			});
 
 			DisplayDeviceInformation();
-		}, 10);
 
+		}, 10);
 	}
 
 	function DrawDevicesOnMap(){
@@ -2118,8 +2124,9 @@ function ReturnBlob( data ){
 					// Map.drawDevices();
 
 					CurrentDevice = Devices[i];
-					DrawAvalibleDevices();
+					// DrawAvalibleDevices();
 					// DisplayDeviceInformation();
+					DeviceChange = true;
 				}
 
 				if( attribute == "description") {
@@ -2128,8 +2135,9 @@ function ReturnBlob( data ){
 					$('#infoDeviceDescription').val( CurrentDevice.Description );
 
 					CurrentDevice = Devices[i];
-					DrawAvalibleDevices();
+					// DrawAvalibleDevices();
 					DisplayDeviceInformation();
+					DeviceChange = true;
 				}
 
 				if( attribute == "location"){
@@ -2138,8 +2146,9 @@ function ReturnBlob( data ){
 					$('#infoDeviceLocation').val( CurrentDevice.Location );
 
 					CurrentDevice = Devices[i];
-					DrawAvalibleDevices();
+					// DrawAvalibleDevices();
 					DisplayDeviceInformation();
+					DeviceChange = true;
 				}
 
 				if( attribute == "serialnumber"){
@@ -2148,8 +2157,9 @@ function ReturnBlob( data ){
 					$('#infoDeviceSerialNumber').val( CurrentDevice.SerialNumber );
 
 					CurrentDevice = Devices[i];
-					DrawAvalibleDevices();
+					// DrawAvalibleDevices();
 					DisplayDeviceInformation();
+					DeviceChange = true;
 				}
 
 				// DisplayDeviceInformation();
@@ -2213,31 +2223,23 @@ function ReturnBlob( data ){
 
 	}
 
-	// function AddMessage( msg, icon ){
-	// 	if( icon == null){icon = "noicon"};
-
-	// 	var m = "<message class="+icon+"><p>"+msg+"</p></message>";
-
-	// 	MessageArray.push( m );
-
-	// 	if( AddMessages == null){
-	// 		AddManager( true );
-	// 	}
-	// }
-
 	function ChangeGroup( num ){
 		try{
 			ClearMap();
 			ClearDevices();
 			ResizeMap();
 
-			// Map.clear();
-			// Map.removeDevices();
-
 			CurrentMap.length = 0;
 			CurrentDevice = 0;
 			Maps.length = 0;
 			Devices.length = 0;
+
+			OnMapDevices.length = 0;
+			OffMapDevices.length = 0;
+
+			OnMapFunctions.empty();
+			OffMapFunctions.empty();
+
 			// DrawAvalibleDevices();
 
 			// DrawOnMapDevices();
@@ -2246,25 +2248,15 @@ function ReturnBlob( data ){
 			Delete.length = 0;
 
 			// DrawTitle()
-
-			// $('li.button.current').removeClass("current").children('i').remove();
 			$('li.button.remove').removeClass("remove");
 			$('#btnBinSelected').html(Delete.length+" selected");
-			// $('#btnBin').parents('.master').attr("novis", "");
 			$('#deleteoptions').attr("novis", "");
 			$('#deleteoptions').prev().removeAttr("novis");
 			CurrentGroup = Groups[ num ];
 			console.log( CurrentGroup);
 
 			$('#inputselectGroup').val( CurrentGroup.ID_Group+" - "+CurrentGroup.Name );
-			// .attr({
-			// 	"path" : CurrentGroup.GroupPath,
-			// 	"fullpath" : CurrentGroup.FullPath,
-			// 	"groupID" : CurrentGroup.ID_Group,
-			// 	"name" : CurrentGroup.Name,
-			// });
 
-			// File.read.data();
 			Spinner.show();
 			ReadFile.data();
 
@@ -2276,7 +2268,6 @@ function ReturnBlob( data ){
 
 	function ResetDeviceInformation(event){
 		$('#imageDevice').css("background-image", "url(./img/icon.png)")
-		// $('#infoDeviceID').val("");
 		$('#infoDevicePosition').val("");
 		$('#infoDeviceDescription').val("");
 		$('#infoDeviceLocation').val("");
@@ -2572,7 +2563,41 @@ function ReturnBlob( data ){
 			// Map.drawDevices();
 			// File.write.data();
 			WriteFile.data();
-			DrawAvalibleDevices();
+
+			OnMapDevices.length = 0;
+			OffMapDevices.length = 0;
+
+
+
+
+
+			// DrawAvalibleDevices();
+
+			OnMapDevices.length = 0;
+			OffMapDevices.length = 0;
+
+			for (var i = 0; i < Devices.length; i++) {
+				if( Devices[i].ID_Map == CurrentMap.ID_Map ){
+					OnMapDevices.push( Devices[i] );
+				}
+				if( Devices[i].ID_Map == 0 ){
+					OffMapDevices.push( Devices[i] );
+				}
+			};
+			OnMapDevices = SplitIntoGroups( OnMapDevices );
+			OffMapDevices = SplitIntoGroups( OffMapDevices );
+
+			OnMapFunctions.empty();
+			OffMapFunctions.empty();
+
+			LoadOnMapDevices();
+			LoadOffMapDevices();
+
+			setTimeout(function() {
+				OnMapFunctions.MoveForward();
+			}, 100);
+
+
 			DrawDevicesOnMap();
 			// $('#btnBin').parents('row.master').attr("novis", "");
 			$('#deleteoptions').attr("novis", "");
@@ -2695,10 +2720,34 @@ function ReturnBlob( data ){
 				$('#informationPanel').removeAttr("open").attr("left", "");
 				$('#DevicesOnMapPanel').removeAttr("right").removeAttr("left").attr("open", "");
 				$('#MissingDevicesPanel').removeAttr("right").removeAttr("left").removeAttr("open").attr("right", "");
-				OnMapFunctions.empty();
-				setTimeout(function() {
-					OnMapFunctions.MoveForward();
-				}, 10);
+
+				if( DeviceChange == true){
+					OnMapDevices.length = 0;
+					OffMapDevices.length = 0;
+
+					for (var i = 0; i < Devices.length; i++) {
+						if( Devices[i].ID_Map == CurrentMap.ID_Map ){
+							OnMapDevices.push( Devices[i] );
+						}
+						if( Devices[i].ID_Map == 0 ){
+							OffMapDevices.push( Devices[i] );
+						}
+					};
+					OnMapDevices = SplitIntoGroups( OnMapDevices );
+					OffMapDevices = SplitIntoGroups( OffMapDevices );
+
+					OnMapFunctions.empty();
+					OffMapFunctions.empty();
+
+					LoadOnMapDevices();
+					LoadOffMapDevices();
+
+					setTimeout(function() {
+						OnMapFunctions.MoveForward();
+					}, 100);
+
+					DeviceChange = true;
+				}
 			}
 			if( $(this).parents('panel.child').attr("id") == "DevicesOnMapPanel"){
 				$('#DevicesOnMapPanel').removeAttr("open").attr("left", "");
@@ -2760,6 +2809,8 @@ function ReturnBlob( data ){
 
 				// DrawAvalibleDevices();
 				setTimeout(function() {
+					OnMapDevices.length = 0;
+					OffMapDevices.length = 0;
 
 					for (var i = 0; i < Devices.length; i++) {
 						if( Devices[i].ID_Map == CurrentMap.ID_Map ){
