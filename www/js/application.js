@@ -407,26 +407,35 @@ var Ajax ={
 						WriteFile.settings();
 						WriteFile.data( );
 						AddMessage("Upload finished - Check log", "short", "top");
-						OnMapDevices.length = 0;
-						OffMapDevices.length = 0;
 
-						for (var i = 0; i < Devices.length; i++) {
-							if( Devices[i].ID_Map == CurrentMap.ID_Map ){
-								OnMapDevices.push( Devices[i] );
-							}
-						};
+						setTimeout(function() {
+							OnMapDevices.length = 0;
+							OffMapDevices.length = 0;
 
-						alert(" splitting onmaps into groups")
-						OnMapDevices = SplitIntoGroups( OnMapDevices );
-						alert("emptying ")
-						OnMapFunctions.empty();
-						OffMapFunctions.empty();
+							alert( Devices.length );
 
-						alert(" adding loading")
-						LoadOnMapDevices();
-						LoadOffMapDevices();
-						alert("moving forward")
-						OnMapFunctions.MoveForward();
+							for (var i = 0; i < Devices.length; i++) {
+								if( Devices[i].ID_Map == CurrentMap.ID_Map ){
+									OnMapDevices.push( Devices[i] );
+								}
+								if( Devices[i].ID_Map == 0 ){
+									OffMapDevices.push( Devices[i] );
+								}
+							};
+							OnMapDevices = SplitIntoGroups( OnMapDevices );
+							OffMapDevices = SplitIntoGroups( OffMapDevices );
+
+							OnMapFunctions.empty();
+							OffMapFunctions.empty();
+
+							LoadOnMapDevices();
+							LoadOffMapDevices();
+
+							setTimeout(function() {
+								OnMapFunctions.MoveForward();
+							}, 100);
+
+						}, 100);
 
 
 						DrawDevicesOnMap();
