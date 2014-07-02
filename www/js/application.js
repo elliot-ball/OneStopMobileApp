@@ -2840,8 +2840,6 @@ function ReturnBlob( data ){
 
 	$(window).hammer( HammerOptions ).on("tap",".map", function ( event ){
 		if( maptapped == false){
-			Spinner.show();
-
 			maptapped = true;
 
 			var id = $(this).attr("id");
@@ -2858,8 +2856,10 @@ function ReturnBlob( data ){
 				setTimeout(function() {
 					$('#MapsMasterPanel').removeAttr("open").attr("right", "");
 					$('#DevicesOnMapPanel').removeAttr("left").attr("open", "");
-				}, 10);
+					Spinner.hide()
+				}, 1);
 			}else{
+				Spinner.show();
 				ClearMap();
 				for (var i = 0; i < Maps.length; i++) {
 					if( Maps[i].ID_Map == id ){
