@@ -405,9 +405,27 @@ var Ajax ={
 					RemoveFile.changes();
 					setTimeout(function() {
 						WriteFile.settings();
-						WriteFile.data();
-						Spinner.hide();
+						WriteFile.data( );
 						AddMessage("Upload finished - Check log", "short", "top");
+
+						Spinner.show();
+
+						for (var i = 0; i < Devices.length; i++) {
+							if( Devices[i].ID_Map == CurrentMap.ID_Map ){
+								OnMapDevices.push( Devices[i] );
+							}
+						};
+						OnMapDevices = SplitIntoGroups( OnMapDevices );
+
+						OnMapFunctions.empty();
+
+						LoadOnMapDevices();
+
+						setTimeout(function() {
+							OnMapFunctions.MoveForward();
+						}, 100);
+
+						DrawDevicesOnMap();
 					}, 100);
 				},
 				error: function( et, e ){
@@ -633,7 +651,7 @@ function ReturnBlob( data ){
 				}, File.error);
 			}, File.error);
 		},
-		data: function(e){
+		data: function( e ){
 			var fileName = CurrentGroup.ID_Group + ".json", data = new Object();
 			data.Date = GetToday(); data.Maps = Maps; data.Devices = Devices;
 			window.requestFileSystem( RequestLocalSystem(), RequestSize, function ( fs ){
@@ -651,8 +669,8 @@ function ReturnBlob( data ){
 								// DrawAvalibleDevices();
 								DrawTotalDevices();
 								// DrawOnMapDevices();
-								OnMapFunctions.empty();
-								OffMapFunctions.empty();
+								// OnMapFunctions.empty();
+								// OffMapFunctions.empty();
 								DrawDate();
 
 								Spinner.hide();
