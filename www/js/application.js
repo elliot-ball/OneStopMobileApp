@@ -1140,7 +1140,7 @@ function ReturnBlob( data ){
 		};
 
 		$('#MissingDevicesPanel').removeAttr("open").attr("right", "");
-		$('#DevicesOnMapPanel').removeAttr("left").attr("right", "");
+		// $('#DevicesOnMapPanel').removeAttr("left").attr("right", "");
 		$('#informationPanel').removeAttr("left").attr("open", "");
 
 		setTimeout(function() {
@@ -2748,11 +2748,15 @@ function ReturnBlob( data ){
 				$('#DevicesOnMapPanel').removeAttr("left").removeAttr("right").attr("open");
 			}
 			if( $(this).parents('panel.child').attr("id") == "informationPanel"){
+
 				$('#informationPanel').removeAttr("open").attr("left", "");
-				$('#DevicesOnMapPanel').removeAttr("right").removeAttr("left").attr("open", "");
-				$('#MissingDevicesPanel').removeAttr("right").removeAttr("left").removeAttr("open").attr("right", "");
+
 
 				if( DeviceChange == true ){
+
+					$('#DevicesOnMapPanel').removeAttr("right").removeAttr("left").attr("open", "");
+					$('#MissingDevicesPanel').removeAttr("right").removeAttr("left").removeAttr("open").attr("right", "");
+
 					OnMapDevices.length = 0;
 
 					for (var i = 0; i < Devices.length; i++) {
@@ -2772,6 +2776,10 @@ function ReturnBlob( data ){
 				}
 
 				if( DeviceAdd == true){
+
+					$('#MissingDevicesPanel').removeAttr("right").removeAttr("left").attr("open", "");
+					// $('#MissingDevicesPanel').removeAttr("right").removeAttr("left").removeAttr("open").attr("right", "");
+
 					OnMapDevices.length = 0;
 					OffMapDevices.length = 0;
 
