@@ -88,7 +88,7 @@ try{
 	//store delete information
 	var User = new Object(), Groups = new Array(), Devices = new Array(), Maps = new Array(), Changes = new Array(), Delete = new Array()
 
-	var btnAddHit = false, moving = false;
+	var btnAddHit = false, moving = false, openPanel = false;
 	var DeviceChange = false, DeviceAddd = false;
 
 // // User object
@@ -152,7 +152,10 @@ try{
 		show: function (e){
 			// $('spinner').removeAttr("novis").addClass("start");
 			if( !ThisDevice.Browser )
-				window.plugins.spinnerDialog.show();
+				window.plugins.spinnerDialog.hide();
+				setTimeout(function() {
+					window.plugins.spinnerDialog.show();
+				}, 1);
 		},
 		hide: function(e){
 			// $('spinner>message').remove();
@@ -1425,13 +1428,11 @@ function ReturnBlob( data ){
 		MoveForward: function(){
 			if( OnMapDevices.length > 0){
 				if( OnMapFunctions.current == -1){
-					Spinner.hide();
 					Spinner.show();
 					OnMapFunctions.RootGroup();
 				}else{
 					OnMapFunctions.current++;
 					if( OnMapFunctions.current < (OnMapDevices.length)){
-						Spinner.hide();
 						Spinner.show();
 						OnMapFunctions.NextGroup();
 						$('a.button#btnforwards_On').prev('indicator').html( OffMapFunctions.current );
@@ -1448,7 +1449,6 @@ function ReturnBlob( data ){
 			if( OnMapFunctions.current < 0){
 				OnMapFunctions.current = 0;
 			}else{
-				Spinner.hide();
 				Spinner.show();
 				OnMapFunctions.PrevGroup();
 				$('a.button#btnforwards_On').prev('indicator').html( OffMapFunctions.current );
@@ -1536,13 +1536,11 @@ function ReturnBlob( data ){
 
 			if( OffMapDevices.length > 0){
 				if( OffMapFunctions.current == -1){
-					Spinner.hide();
 					Spinner.show();
 					OffMapFunctions.RootGroup();
 				}else{
 					OffMapFunctions.current++;
 					if( OffMapFunctions.current < (OffMapDevices.length)){
-						Spinner.hide();
 						Spinner.show();
 						OffMapFunctions.NextGroup();
 						$('a.button#btnforwards_Off').prev('indicator').html( OffMapFunctions.current );
@@ -1560,7 +1558,6 @@ function ReturnBlob( data ){
 			if( OffMapFunctions.current < 0 ){
 				OffMapFunctions.current = 0;
 			}else{
-				Spinner.hide();
 				Spinner.show();
 				OffMapFunctions.PrevGroup();
 				$('a.button#btnforwards_Off').prev('indicator').html( OffMapFunctions.current );
@@ -2456,14 +2453,20 @@ function ReturnBlob( data ){
 
 	$('#btnTogPanel').hammer( HammerOptions ).on("tap", function ( event ){
 		event.preventDefault();
-		$(this).parents('page').find('content>panel.master').toggleClass("out").toggleClass("in");
 
-		$('map>viewport').attr("novis", "");
-		ClearDevices();
-		setTimeout(function() {
-			$('map>viewport').removeAttr("novis")
-			ResizeMap();
-		}, 100);
+		if( openPanel == false ){
+			openPanel = true;
+			$(this).parents('page').find('content>panel.master').toggleClass("out").toggleClass("in");
+			$('map>viewport').attr("novis", "");
+			ClearDevices();
+			setTimeout(function() {
+				$('map>viewport').removeAttr("novis")
+				ResizeMap();
+			}, 100);
+			setTimeout(function() {
+				openPanel = false;
+			}, 1000);
+		}
 	});
 
 	$('#btnLogin').hammer( HammerOptions ).on("tap", function ( event ){
