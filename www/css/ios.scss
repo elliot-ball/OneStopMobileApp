@@ -164,12 +164,12 @@ row.head{
 	border-bottom: 1px solid $grey2;
 
 }
-row.back.o{
-	border-top: 1px solid $grey2;
-}
+
 row.back{
-		-webkit-box-flex: 1;
-		-webkit-box-orient: horizontal;
+		// -webkit-box-flex: 1;
+		// -webkit-box-orient: horizontal;
+		// -webkit-box-pack: start;
+		// -webkit-box-align: center;
 	a{
 		margin: 0;
 		border-radius: 0;

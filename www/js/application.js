@@ -19,13 +19,13 @@ try{
 	ThisDevice.Browser = false;
 
 	//Set up scrolling elements
-	$.each( $('scroll.y'), function(index, item){
-		$(item).parent().css({
-			"overflow" : "hidden",
-			"width" : "100%",
-			"max-width" : $(item).width(),
-			"min-width" : $(item).width(),
-		})
+	$.each( $('scroll.y.fill'), function(index, item){
+		// $(item).parent().css({
+		// 	"overflow" : "hidden",
+		// 	"width" : "100%",
+		// 	"max-width" : $(item).width(),
+		// 	"min-width" : $(item).width(),
+		// })
 		$(item).css({
 			"width" : "100%",
 			"max-width" : $(item).width(),
@@ -1249,7 +1249,6 @@ function ReturnBlob( data ){
 
 	function orientationFix(e){
 		var orientRotation = window.orientation;
-		console.log( orientRotation );
 		switch( orientRotation ){
 			case 0:
 				OrientPortrait();
@@ -1268,10 +1267,23 @@ function ReturnBlob( data ){
 		function OrientPortrait(e){
 			console.log("portrait");
 			ResizeDeviceImage();
+			$(document.body).addClass("portrait").removeClass("landscape");
+			('map>viewport').attr("novis", "");
+			ClearDevices();
+			setTimeout(function() {
+				$('map>viewport').removeAttr("novis")
+				ResizeMap();
+			}, 100);
 		}
 		function OrientLandscape(e){
 			console.log("landscape");
-			ResizeDeviceImage();
+			$(document.body).addClass("landscape").removeClass("portrait");
+			('map>viewport').attr("novis", "");
+			ClearDevices();
+			setTimeout(function() {
+				$('map>viewport').removeAttr("novis")
+				ResizeMap();
+			}, 100);
 		}
 	}
 
@@ -2471,6 +2483,10 @@ function ReturnBlob( data ){
 	document.addEventListener("online", PhoneGap.online, false);
 	document.addEventListener("offline", PhoneGap.offline, false);
 
+
+	$(document).on("orientation", function(){
+		console.log("rotated");
+	})
 	window.onorientationchange = orientationFix;
 
 	var HammerOptions = {
@@ -3254,24 +3270,24 @@ function ReturnBlob( data ){
 //Nothing to see here
 	$('map>viewport').hammer(HammerOptions).on("transformstart transform transformend", function(e){
 		e.preventDefault();
-		// switch( e.type ){
-		// 	case "transformstart":
-		// 		transform.start = e.gesture.center;
-		// 	break;
-		// 	case "transform":
+		switch( e.type ){
+			case "transformstart":
+				transform.start = e.gesture.center;
+			break;
+			case "transform":
 
-		// 		transform.scale = Math.max( 1.0, e.gesture.scale * transform.oldScale) ;
-		// 		transform.scale = Math.min( 5, transform.scale);
-		// 		transform.matrix = $(this).css("-webkit-transform").replace(/(matrix)|([\()])/g, " ").split(",");
-		// 		$(this).css("-webkit-transform", "matrix("+transform.scale+",0,0,"+transform.scale+",0,0)");
+				transform.scale = Math.max( 1.0, e.gesture.scale * transform.oldScale) ;
+				transform.scale = Math.min( 5, transform.scale);
+				transform.matrix = $(this).css("-webkit-transform").replace(/(matrix)|([\()])/g, " ").split(",");
+				$(this).css("-webkit-transform", "matrix("+transform.scale+",0,0,"+transform.scale+",0,0)");
 
 
-		// 	break;
-		// 	case "transformend":
-		// 		transform.oldScale = transform.scale;
-		// 		transform.end = e.gesture.center;
-		// 	break;
-		// }
+			break;
+			case "transformend":
+				transform.oldScale = transform.scale;
+				transform.end = e.gesture.center;
+			break;
+		}
 	});
 
 	function GetFirstGroup(){

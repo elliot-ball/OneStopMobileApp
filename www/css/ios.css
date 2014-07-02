@@ -136,14 +136,6 @@ row.head {
   border-bottom: 1px solid #c8c7cc;
 }
 
-row.back.o {
-  border-top: 1px solid #c8c7cc;
-}
-
-row.back {
-  -webkit-box-flex: 1;
-  -webkit-box-orient: horizontal;
-}
 row.back a {
   margin: 0;
   border-radius: 0;
