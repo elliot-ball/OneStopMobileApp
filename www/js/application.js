@@ -822,7 +822,7 @@ function ReturnBlob( data ){
 							else
 								Spinner.hide();
 								AddMessage("Connection offline, Unable to download groups", "long", "bottom");
-								alert("Unable to download groups. Please check your connection");
+								// alert("Unable to download groups. Please check your connection");
 						}else{
 							File.error(e);
 						}
@@ -2079,6 +2079,8 @@ function ReturnBlob( data ){
 
 	var PhoneGap = {
 		ready: function( event ){
+			navigator.splashscreen.show();
+
 			Connection.online = true;
 			Connection.status = "online";
 
@@ -2194,16 +2196,6 @@ function ReturnBlob( data ){
 					// DisplayDeviceInformation();
 					DeviceChange = true;
 				}
-				if( attribute == "assetnumber"){
-					Devices[i].AssetNumber = result;
-					AddChanges( CurrentDevice.AssetNumber, 'assetnumber', result );
-					$('#infoDeviceAssetNumber').val( CurrentDevice.AssetNumber );
-
-					CurrentDevice = Devices[i];
-					// DrawAvalibleDevices();
-					DisplayDeviceInformation();
-					DeviceChange = true;
-				}
 
 				if( attribute == "description") {
 					Devices[i].Description = result;
@@ -2237,6 +2229,18 @@ function ReturnBlob( data ){
 					DisplayDeviceInformation();
 					DeviceChange = true;
 				}
+
+				if( attribute == "assetnumber"){
+					Devices[i].AssetNumber = result;
+					AddChanges( CurrentDevice.ID_Device, 'assetnumber', result );
+					$('#infoDeviceAssetNumber').val( CurrentDevice.AssetNumber );
+
+					CurrentDevice = Devices[i];
+					// DrawAvalibleDevices();
+					DisplayDeviceInformation();
+					DeviceChange = true;
+				}
+
 
 				// DisplayDeviceInformation();
 			}
@@ -3457,7 +3461,7 @@ function ReturnBlob( data ){
 		switch( target ){
 			case "infoDeviceAssetNumber":
 				NotifyPrompt(
-					"Give the device a new description",
+					"Give the device a new Asset Number",
 					function(results){
 						if( results.buttonIndex == 1){
 							ChangeInformation( results.input1, "assetnumber");
