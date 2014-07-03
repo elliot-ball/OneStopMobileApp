@@ -906,6 +906,7 @@ a{
 	&.logo{
 		&:after{
 		font-family: "FontAwesome";
+		content: "\f0c9";
 		}
 	}
 	&.add{
@@ -1160,8 +1161,6 @@ pog{
 			}
 		}
 	}
-
-
 }
 display{
 	display: -webkit-box;

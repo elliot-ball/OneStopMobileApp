@@ -2194,6 +2194,16 @@ function ReturnBlob( data ){
 					// DisplayDeviceInformation();
 					DeviceChange = true;
 				}
+				if( attribute == "assetnumber"){
+					Devices[i].AssetNumber = result;
+					AddChanges( CurrentDevice.AssetNumber, 'assetnumber', result );
+					$('#infoDeviceAssetNumber').val( CurrentDevice.AssetNumber );
+
+					CurrentDevice = Devices[i];
+					// DrawAvalibleDevices();
+					DisplayDeviceInformation();
+					DeviceChange = true;
+				}
 
 				if( attribute == "description") {
 					Devices[i].Description = result;
@@ -2338,6 +2348,7 @@ function ReturnBlob( data ){
 		$('#infoDeviceDescription').val("");
 		$('#infoDeviceLocation').val("");
 		$('#infoDeviceSerialNumber').val("");
+		$('#infoDeviceAssetNumber').val("");
 		$('#infoDeviceLock').prop("checked", 0);
 
 	}
@@ -2357,6 +2368,12 @@ function ReturnBlob( data ){
 			$('#infoDeviceSerialNumber').val( "No Serial" );
 		}else{
 			$('#infoDeviceSerialNumber').val( CurrentDevice.SerialNumber);
+		}
+		if( CurrentDevice.AssetNumber == "" || CurrentDevice.AssetNumber == null){
+			$('#infoDeviceAssetNumber').val("No Asset Number");
+		}else{
+		$('#infoDeviceAssetNumber').val( CurrentDevice.AssetNumber );
+
 		}
 
 		if( CurrentDevice.Locked == true ){
@@ -3438,6 +3455,18 @@ function ReturnBlob( data ){
 		var title="", msg="",buttons=["Ok","Cancel"],value="", defaultText="";
 		console.log( target )
 		switch( target ){
+			case "infoDeviceAssetNumber":
+				NotifyPrompt(
+					"Give the device a new description",
+					function(results){
+						if( results.buttonIndex == 1){
+							ChangeInformation( results.input1, "assetnumber");
+						}
+					},
+					"Asset Number",
+					buttons,
+					CurrentDevice.AssetNumber);
+			break;
 			case "infoDeviceDescription":
 				NotifyPrompt(
 					"Give the device a new description",
