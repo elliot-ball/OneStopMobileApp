@@ -1,7 +1,7 @@
 Zepto(function($){
 try{
 
-	window.onorientationchange = orientationFix;
+	// window.onorientationchange = orientationFix;
 
 	var AppStarted = false;
 	//Object holding Users Device information
@@ -1156,7 +1156,7 @@ function ReturnBlob( data ){
 
 		$('#MissingDevicesPanel').removeAttr("open").attr("right", "");
 		// $('#DevicesOnMapPanel').removeAttr("left").attr("right", "");
-		$('#informationPanel').removeAttr("left").attr("open", "");
+		$('#InformationPanel').removeAttr("left").attr("open", "");
 
 		setTimeout(function() {
 			// DrawAvalibleDevices();
@@ -1251,56 +1251,56 @@ function ReturnBlob( data ){
 	}
 
 
-	function orientationFix(e){
-		var orientRotation = window.orientation;
-		switch( orientRotation ){
-			case 0:
-				alert("landscape 0")
-				OrientLandscape();
-			break;
-			case 90:
-				alert("portrait 90")
-				OrientPortrait();
-			break;
-			case 180:
-				alert("landscape 180")
-				OrientLandscape();
-			break;
-			case 270:
-				alert("portrait 270")
-				OrientPortrait();
-			break;
-		}
+	// function orientationFix(e){
+	// 	var orientRotation = window.orientation;
+	// 	switch( orientRotation ){
+	// 		case 0:
+	// 			alert("landscape 0")
+	// 			OrientLandscape();
+	// 		break;
+	// 		case 90:
+	// 			alert("portrait 90")
+	// 			OrientPortrait();
+	// 		break;
+	// 		case 180:
+	// 			alert("landscape 180")
+	// 			OrientLandscape();
+	// 		break;
+	// 		case 270:
+	// 			alert("portrait 270")
+	// 			OrientPortrait();
+	// 		break;
+	// 	}
 
-		function OrientPortrait(e){
+	// 	function OrientPortrait(e){
 
-			try{
-				$('page').removeClass("landscape").addClass("portrait", "");
-			}catch(e){
-				alert( "OrientERRROR: " + e.toString() );
-			}
-			$('map>viewport').attr("novis", "");
-			ClearDevices();
-			setTimeout(function() {
-				$('map>viewport').removeAttr("novis")
-				ResizeMap();
-			}, 100);
-		}
-		function OrientLandscape(e){
-			try{
-				$('page').removeClass("portrait").addClass("landscape", "")
+	// 		try{
+	// 			$('page').removeClass("landscape").addClass("portrait", "");
+	// 		}catch(e){
+	// 			alert( "OrientERRROR: " + e.toString() );
+	// 		}
+	// 		$('map>viewport').attr("novis", "");
+	// 		ClearDevices();
+	// 		setTimeout(function() {
+	// 			$('map>viewport').removeAttr("novis")
+	// 			ResizeMap();
+	// 		}, 100);
+	// 	}
+	// 	function OrientLandscape(e){
+	// 		try{
+	// 			$('page').removeClass("portrait").addClass("landscape", "")
 
-			}catch(e){
-				alert( "OrientERRROR: " + e.toString() );
-			}
-			$('map>viewport').attr("novis", "");
-			ClearDevices();
-			setTimeout(function() {
-				$('map>viewport').removeAttr("novis")
-				ResizeMap();
-			}, 100);
-		}
-	}
+	// 		}catch(e){
+	// 			alert( "OrientERRROR: " + e.toString() );
+	// 		}
+	// 		$('map>viewport').attr("novis", "");
+	// 		ClearDevices();
+	// 		setTimeout(function() {
+	// 			$('map>viewport').removeAttr("novis")
+	// 			ResizeMap();
+	// 		}, 100);
+	// 	}
+	// }
 
 	function ClearDevices(){
 		$('viewport>pog').remove();
@@ -2578,7 +2578,7 @@ function ReturnBlob( data ){
 			$('#MapsMasterPanel').removeAttr("left").removeAttr("right").attr("open", "");
 			$('#DevicesOnMapPanel').removeAttr("open").removeAttr("left").removeAttr("right").attr("left", "");
 			$('#MissingDevicesPanel').removeAttr("open").removeAttr("left").removeAttr("right").attr("right", "");
-			$('#informationPanel').removeAttr("open").removeAttr("left").removeAttr("right").attr("left", "");
+			$('#InformationPanel').removeAttr("open").removeAttr("left").removeAttr("right").attr("left", "");
 
 			$('map>viewport>pog.selecteddevice').removeClass("selecteddevice");
 			$('#MapsMasterPanel').removeAttr("right").attr("open", "");
@@ -2777,9 +2777,9 @@ function ReturnBlob( data ){
 				$('#MissingDevicesPanel').removeAttr("open").attr("right", "");
 				$('#DevicesOnMapPanel').removeAttr("left").removeAttr("right").attr("open");
 			}
-			if( $(this).parents('panel.child').attr("id") == "informationPanel"){
+			if( $(this).parents('panel.child').attr("id") == "InformationPanel"){
 
-				$('#informationPanel').removeAttr("open").attr("left", "");
+				$('#InformationPanel').removeAttr("open").attr("left", "");
 
 
 				if( DeviceChange == true ){
@@ -2989,7 +2989,7 @@ function ReturnBlob( data ){
 				setTimeout(function() {
 					$('#DevicesOnMapPanel').removeAttr("open").attr("right", "");
 					$('#MissingDevicesPanel').removeAttr("open").attr("right", "");
-					$('#informationPanel').removeAttr("left").attr("open", "");
+					$('#InformationPanel').removeAttr("left").attr("open", "");
 
 				}, 10);
 
@@ -3171,7 +3171,7 @@ function ReturnBlob( data ){
 
 		setTimeout(function() {
 			$('#DevicesOnMapPanel').removeAttr("open").attr("right", "");
-			$('#informationPanel').removeAttr("left").attr("open", "");
+			$('#InformationPanel').removeAttr("left").attr("open", "");
 			$('#MissingDevicesPanel').removeAttr("open").attr("right", "");
 
 		}, 10);

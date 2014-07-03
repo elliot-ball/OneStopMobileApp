@@ -906,13 +906,12 @@ a{
 	&.logo{
 		&:after{
 		font-family: "FontAwesome";
-			content: "\f0c9";
 		}
 	}
 	&.add{
 		&:after{
 		font-family: "FontAwesome";
-			content: "\f067";
+				content: "\f067";
 		}
 	}
 	&.download{

@@ -791,7 +791,6 @@ a:after {
 }
 a.logo:after {
   font-family: "FontAwesome";
-  content: "\f0c9";
 }
 a.add:after {
   font-family: "FontAwesome";
