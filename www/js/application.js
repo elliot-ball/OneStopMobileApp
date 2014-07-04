@@ -2026,43 +2026,40 @@ function ReturnBlob( data ){
 
 	var PhoneGap = {
 		ready: function( event ){
-				try{
-				// navigator.splashscreen.show();
-				Connection.online = true;
-				Connection.status = "online";
+			alert("1")
+			navigator.splashscreen.show();
+			Connection.online = true;
+			Connection.status = "online";
+			alert("1")
+			Shadow.hide();
+			ResetDeviceInformation();
+			DrawAvalibleMaps()
+			DrawTotalDevices();
+			alert("3")
 
-				Shadow.hide();
-				ResetDeviceInformation();
-				DrawAvalibleMaps()
-				DrawTotalDevices();
-
-				OnMapFunctions.empty();
-				OffMapFunctions.empty();
-
-
-				// DrawOnMapDevices();
-				// DrawOffMapDevices();
-				DrawDate()
-				DrawTitle()
-
-				if( ThisDevice.Browser == true){
-					Connection.type = "WiFi";
-				}else{
-					Connection.type = navigator.connection.type;
-				}
-
-				// $("#btnBin").parents('row.master').attr("novis", "");
-				$('#deleteoptions').attr("novis", "");
-				$('#deleteoptions').prev().removeAttr("novis");
-
-				if( LAZY ){
-					$('#inputUsername').val( "craig" );
-					$('#inputPassword').val( "password" );
-				}
-				ReadFile.settings();
-			}catch(e){
-				alert( "error in start up " + e.toString() );
+			OnMapFunctions.empty();
+			OffMapFunctions.empty();
+			alert("4")
+			// DrawOnMapDevices();
+			// DrawOffMapDevices();
+			DrawDate()
+			DrawTitle()
+			alert("5")
+			if( ThisDevice.Browser == true){
+				Connection.type = "WiFi";
+			}else{
+				Connection.type = navigator.connection.type;
 			}
+
+			// $("#btnBin").parents('row.master').attr("novis", "");
+			$('#deleteoptions').attr("novis", "");
+			$('#deleteoptions').prev().removeAttr("novis");
+			alert("6")
+			if( LAZY ){
+				$('#inputUsername').val( "craig" );
+				$('#inputPassword').val( "password" );
+			}
+			ReadFile.settings();
 		},
 		back: function( event ){
 			if( $('#login').hasClass("visible")){
