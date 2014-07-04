@@ -196,7 +196,8 @@ label.checkbox{
 	border-radius: 5px;
 	overflow: hidden;
 	input{
-		-webkit-box-flex:1;
+		-webkit-box-flex:0;
+		width: 60px;
 		position: relative;
 		box-sizing: content-box;
 		border: 2px solid $blue;
