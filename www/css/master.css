@@ -185,6 +185,26 @@ row.item span {
   -webkit-box-pack: center;
   box-sizing: border-box;
 }
+row.item p {
+  display: -webkit-box;
+  -webkit-box-flex: 1;
+  -webkit-box-align: stretch;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: center;
+  box-sizing: border-box;
+}
+row.item p:first-of-type {
+  max-width: 100px;
+  min-width: 100px;
+  border-right: 1px solid;
+}
+row.item p:not(:first-of-type) {
+  padding-left: 10px;
+  padding-right: 10px;
+  -webkit-box-align: stretch;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: start;
+}
 
 name {
   display: -webkit-box;
@@ -583,6 +603,12 @@ dropdown.content {
   -webkit-box-align: stretch;
   -webkit-box-pack: start;
   -webkit-box-orient: vertical;
+}
+dropdown.content row.item {
+  padding: 10px 5px;
+}
+dropdown.content row.item p {
+  margin: 0;
 }
 
 @media all and (orientation: portrait) {

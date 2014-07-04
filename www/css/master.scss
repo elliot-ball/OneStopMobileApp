@@ -202,6 +202,26 @@ row.item{
 	// 	-webkit-box-pack: center;
 	// 	box-sizing: border-box;
 	// }
+	p{
+		display: -webkit-box;
+		-webkit-box-flex: 1;
+		-webkit-box-align: stretch;
+		-webkit-box-orient: horizontal;
+		-webkit-box-pack: center;
+		box-sizing: border-box;
+		&:first-of-type{
+			max-width: 100px;
+			min-width: 100px;
+			border-right: 1px solid ;
+		}
+		&:not(:first-of-type){
+			padding-left: 10px;
+			padding-right: 10px;
+			-webkit-box-align: stretch;
+			-webkit-box-orient: horizontal;
+			-webkit-box-pack: start;
+		}
+	}
 }
 
 name{
@@ -629,6 +649,12 @@ dropdown.content{
 	-webkit-box-align: stretch;
 	-webkit-box-pack:start;
 	-webkit-box-orient: vertical;
+	row.item{
+		padding: 10px 5px;
+		p{
+			margin:0;
+		}
+	}
 }
 
 
