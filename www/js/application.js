@@ -1581,12 +1581,16 @@ function ReturnBlob( data ){
 		var today = GetToday();
 		var s = "";
 
-		s+= '<dropdown class="master expand"><dropdown class="head"><p>'+ today +'</p><a href="#" class="button"></a></dropdown><dropdown class="content">';
+
+		// s+= '<dropdown class="master expand"><dropdown class="head"><p>'+ today +'</p><a href="#" class="button"></a></dropdown><dropdown class="content">';
+		s += '<dropdown class="master expand"><actionbar><title>'+ today +'</title><a href="#" class="button" id=""></a></actionbar><dropdown class="content">';
 
 		for (var i = 0; i < data.length; i++) {
 			//REMEMBER TO GET THE SERIAL NUMBER OF THE DEVICE
 			if( data[i].ID == null)data[i].ID = "Unknown Device";
-			s += '<dropdown class="master expand"><dropdown class="head"><p>'+ data[i].ID +'</p><a href="#" class="button"></a></dropdown><dropdown class="content">';
+
+			s += '<dropdown class="master expand"><actionbar><title>'+ data[i].ID +'</title><a href="#" class="button" id=""></a></actionbar><dropdown class="content">';
+
 			for (var n = 0; n < data[i].Tasks.length; n++) {
 				console.log("");
 				s += '<row class="item"><p>'+data[i].Tasks[n].Type+'</p><p>'+data[i].Tasks[n].Value+'</p></row>'
@@ -3397,7 +3401,7 @@ function ReturnBlob( data ){
 		ChangeInformation( $('#infoDeviceLock').prop("checked"), 'locked');
 	});
 
-	$(window).hammer(HammerOptions).on("tap", "dropdown.head", function(event){
+	$(window).hammer(HammerOptions).on("tap", "dropdown.master>actionbar", function(event){
 
 		$(this).parent().toggleClass("expand").toggleClass("collapse");
 		$(this).next().children().removeClass("collapse").addClass("expand");

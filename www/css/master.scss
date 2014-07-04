@@ -595,6 +595,43 @@ shadow{
 	}
 }
 
+
+dropdown.master{
+	display: -webkit-box;
+	-webkit-box-flex:0;
+	-webkit-box-align: stretch;
+	-webkit-box-pack:start;
+	-webkit-box-orient: vertical;
+	a.button{
+		max-width: 88px;
+		min-width: 88px;
+	}
+	&.expand{
+		min-height: 44px;
+		max-height: 44px;
+		a.button:after{
+			content:"\f196"
+		}
+		dropdown.content{
+			display: none;
+		}
+	}
+	&.collapse{
+		a.button:after{
+			content:"\f147"
+		}
+	}
+}
+
+dropdown.content{
+	display: -webkit-box;
+	-webkit-box-flex:1;
+	-webkit-box-align: stretch;
+	-webkit-box-pack:start;
+	-webkit-box-orient: vertical;
+}
+
+
 @media all and (orientation: portrait) {
 	content{
 		-webkit-box-orient: vertical;

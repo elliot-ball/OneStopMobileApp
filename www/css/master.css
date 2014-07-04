@@ -552,6 +552,39 @@ shadow {
   max-width: 50px;
 }
 
+dropdown.master {
+  display: -webkit-box;
+  -webkit-box-flex: 0;
+  -webkit-box-align: stretch;
+  -webkit-box-pack: start;
+  -webkit-box-orient: vertical;
+}
+dropdown.master a.button {
+  max-width: 88px;
+  min-width: 88px;
+}
+dropdown.master.expand {
+  min-height: 44px;
+  max-height: 44px;
+}
+dropdown.master.expand a.button:after {
+  content: "\f196";
+}
+dropdown.master.expand dropdown.content {
+  display: none;
+}
+dropdown.master.collapse a.button:after {
+  content: "\f147";
+}
+
+dropdown.content {
+  display: -webkit-box;
+  -webkit-box-flex: 1;
+  -webkit-box-align: stretch;
+  -webkit-box-pack: start;
+  -webkit-box-orient: vertical;
+}
+
 @media all and (orientation: portrait) {
   content {
     -webkit-box-orient: vertical;
