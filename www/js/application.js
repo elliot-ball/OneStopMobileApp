@@ -62,7 +62,7 @@ try{
 	}
 	//Default Style
 	if( !ThisDevice.Android && !ThisDevice.IOS ){
-		$('#deviceStyle').attr("href", "css/android.css");
+		$('#deviceStyle').attr("href", "css/ios.css");
 	}
 
 	//Auto fill the username and password input fields
@@ -2026,7 +2026,7 @@ function ReturnBlob( data ){
 
 	var PhoneGap = {
 		ready: function( event ){
-			navigator.splashscreen.show();
+			// navigator.splashscreen.show();
 			Connection.online = true;
 			Connection.status = "online";
 
