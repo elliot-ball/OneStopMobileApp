@@ -73,7 +73,7 @@ try{
 	//Filesystem request size; 0 by default
 	var MAXZOOM = 2.0, MINZOOM = 1.0, MAPWIDTH = 1000, MAPHEIGHT = 750, SAFEDEVICES = 30, RequestSize;
 	//Server URL's
-	var URL = "http://192.168.100.111:1234", ServerURL = URL+"/mobile.asmx";
+	var URL = "http://192.168.100.109:1234", ServerURL = URL+"/mobile.asmx";
 
 
 
