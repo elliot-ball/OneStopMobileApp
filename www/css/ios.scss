@@ -192,12 +192,16 @@ login{
 }
 
 label.checkbox{
+	-webkit-box-flex:1;
 	padding: 5px;
 	border-radius: 5px;
 	overflow: hidden;
+	max-width: 60px;
+	min-width: 60px;
+	width: 100%;
+
 	input{
-		-webkit-box-flex:0;
-		width: 60px;
+		-webkit-box-flex:1;
 		position: relative;
 		box-sizing: content-box;
 		border: 2px solid $blue;
