@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:gap="http://phonegap.com/ns/1.0"
+        id="com.onestop.mobile"
+        versionCode="10"
+        version="2.0.1">
+
+        <!-- xmlns:android = "http://schemas.android.com/apk/res/android" -->
+
+
+        <name>OneStop Mobile</name>
+        <description>
+                Development and testing version of OneStop Mobile.
+        </description>
+        <author href="http://www.bits.uk.com" email ="">
+                BITS - Business IT Systems
+        </author>
+
+<!-- Platform -->
+        <gap:platform name="ios" />
+        <gap:platform name="android" />
+
+
+<!-- Default Config -->
+<preference name="permissions" value="none" />
+<preference name="phonegap-version" value="3.4.0" />
+<preference name="webviewbounce" value="true" />
+<preference name="target-device" value="tablet" />
+<preference name="Fullscreen" value="true" />
+<preference name="Orientation" value="landscape" />
+<preference name="WebViewBounce" value="true" />
+<preference name="ios-statusbarstyle" value="black-opaque"/>
+<preference name="DisallowOverscroll" value="true"/>
+<!-- <preference name="BackgroundColor" value="0xff0000ff"/> -->
+<preference name="HideKeyboardFormAccessoryBar" value="true"/>
+<preference name="AutoHideSplashScreen" value="false"/>
+
+
+
+
+
+
+<!-- Android -->
+<preference name="KeepRunning" value="false"/>
+<preference name="LoadUrlTimeoutValue" value="10000"/>
+<preference name="SplashScreenDelay" value="10000"/>
+<preference name="InAppBrowserStorageEnabled" value="true"/>
+<!-- <preference name="ShowTitle" value="false"/> -->
+
+<!-- IOS -->
+<preference name="detect-data-types" value="false" />
+<preference name="EnableViewportScale" value="true"/>
+<preference name="MediaPlaybackRequiresUserAction" value="true"/>
+<preference name="AllowInlineMediaPlayback" value="true"/>
+<preference name="BackupWebStorage" value="none"/>
+<preference name="KeyboardShrinksView" value="true"/>
+
+<preference name="TopActivityIndicator" value="gray"/>
+<preference name="KeyboardDisplayRequiresUserAction" value="true"/>
+<preference name="SuppressesIncrementalRendering" value="false"/>
+<preference name="GapBetweenPages" value="0"/>
+<preference name="PageLength" value="0"/>
+<preference name="PaginationBreakingMode" value="page"/>
+<preference name="PaginationMode" value="unpaginated"/>
+<preference name="UIWebViewDecelerationSpeed" value="fast" />
+
+
+<!-- Build preferences -->
+<preference name="android-minSdkVersion" value="11" />
+<preference name="android-maxSdkVersion" value="19" />
+<preference name="android-targetSdkVersion" value="12" />
+<preference name="android-installLocation" value="auto" />
+<preference name="android-windowSoftInputMode" value="adjustResize" />
+<preference name="splash-screen-duration" value="10000"/>
+
+<preference name="target-device" value="tablet"/>
+<preference name="exit-on-suspend" value="true" />
+<preference name="prerendered-icon" value="false" />
+
+
+<!-- Features -->
+        <feature name="http://api.phonegap.com/1.0/file"/>
+        <feature name="http://api.phonegap.com/1.0/file-transfer"/>
+        <feature name="http://api.phonegap.com/1.0/battery"/>
+        <feature name="http://api.phonegap.com/1.0/network"/>
+        <feature name="http://api.phonegap.com/1.0/notification"/>
+        <feature name="http://api.phonegap.com/1.0/camera"/>
+        <feature name="http://api.phonegap.com/1.0/media-capture"/>
+        <feature name="http://api.phonegap.com/1.0/splashscreen"/>
+
+<!-- Build Plugins -->
+        <gap:plugin name="org.apache.cordova.battery-status" />
+        <gap:plugin name="org.apache.cordova.camera" />
+        <gap:plugin name="org.apache.cordova.device" />
+        <gap:plugin name="org.apache.cordova.dialogs" />
+        <gap:plugin name="org.apache.cordova.file" />
+        <gap:plugin name="org.apache.cordova.file-transfer" />
+        <gap:plugin name="org.apache.cordova.network-information" />
+        <gap:plugin name="org.apache.cordova.vibration" />
+        <gap:plugin name="org.apache.cordova.splashscreen" />
+
+<!-- https://build.phonegap.com/plugins/740 -->
+        <gap:plugin name="nl.x-services.plugins.toast"/>
+<!-- https://github.com/mobimentum/phonegap-plugin-loading-spinner/blob/2ade019c2abaed578ad0be73530d2b185a37cb5d/README.md -->
+        <!-- <gap:plugin name="it.mobimentum.phonegapspinnerplugin"/> -->
+<!-- https://build.phonegap.com/plugins/747 -->
+        <gap:plugin name="hu.dpal.phonegap.plugins.spinnerdialog" version="0.2.1" />
+
+<!-- Icon -->
+        <icon src="icon.png" width="128" height="128"/>
+        <gap:splash src="Default-Portrait.png" gap:platform="ios" width="768" height="1024" />
+        <gap:splash src="Default-Landscape.png" gap:platform="ios" width="1024" height="768" />
+        <gap:splash src="Default-Portrait@2x.png" gap:platform="ios" width="1536" height="2048" />
+        <gap:splash src="Default-Landscape@2x.png" gap:platform="ios" width="2048" height="1536" />
+
+<!-- Splash Screen -->
+        <gap:splash src="splash.png" />
+
+<!-- Access -->
+        <access origin="*" />
+</widget>

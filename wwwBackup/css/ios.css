@@ -1,0 +1,470 @@
+#infoMapNum, #infoDeviceNum, #infoDownloadDate {
+  border: 0;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+#infoMapNum::-webkit-input-placeholder, #infoDeviceNum::-webkit-input-placeholder, #infoDownloadDate::-webkit-input-placeholder {
+  color: black !important;
+}
+
+::-webkit-input-placeholder {
+  font-family: Helvetica;
+  font-weight: normal;
+  font-size: 1em;
+  color: #007aff;
+  border-radius: 2px;
+  background-color: white;
+}
+
+indicator {
+  color: #007aff;
+  font-weight: bold;
+}
+
+label {
+  font-family: Helvetica;
+  font-weight: normal;
+  font-size: 1em;
+  color: #007aff;
+  border-radius: 2px;
+  background-color: white;
+}
+
+.blur {
+  -webkit-filter: blur(2px);
+}
+
+page#main {
+  background-color: white;
+}
+
+page#login {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+page#login actionbar {
+  visibility: hidden;
+}
+
+login {
+  border: 3px solid #dddbdb;
+  border-radius: 5px;
+  background-color: #efeff4;
+  -webkit-box-flex: 1;
+  min-width: 350px;
+  max-width: 350px;
+  padding: 10px;
+  -webkit-box-align: stretch;
+}
+login a.button {
+  background-color: white;
+}
+
+scroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: #efeff4;
+}
+scroll::-webkit-scrollbar-track {
+  background-color: #efeff4;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 122, 255, 0.5);
+  border-radius: 25px;
+}
+
+actionbar {
+  background-color: #f7f7f8;
+  border-top: 1px solid #8e8e93;
+  border-bottom: 1px solid #8e8e93;
+}
+actionbar a.button {
+  font-weight: normal;
+  font-size: 1.2em;
+  border-radius: 0;
+}
+
+content {
+  background-color: #efeff4;
+}
+
+map {
+  background-color: white;
+}
+
+panel.master {
+  background-color: white;
+}
+
+panel.master:not([noswipe]) {
+  border-right: 1px solid #dddbdb;
+}
+
+panel.child {
+  background-color: #efeff4;
+}
+
+panel.out {
+  border-right: 1px solid #dddbdb;
+}
+panel.out panel.group {
+  border-right: 1px solid #dddbdb;
+}
+
+swipe {
+  background-color: #f7f7f8;
+}
+
+row.master {
+  background-color: #efeff4;
+}
+row.master#deleteoptions .head {
+  margin: 0;
+  text-transform: none;
+}
+row.master:not(:first-child) {
+  border-top: 1px solid #c8c7cc;
+}
+
+row.head {
+  margin-top: 10px;
+  text-transform: uppercase;
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.4);
+  background-color: transparent;
+  border-bottom: 1px solid #c8c7cc;
+}
+
+row.back a {
+  margin: 0;
+  border-radius: 0;
+  border: 0;
+  width: 100%;
+  -webkit-box-pack: center;
+  padding: 10px 10px;
+}
+
+row.content {
+  background-color: white;
+}
+
+row.o {
+  background-color: white !important;
+}
+
+row.item:not(:only-child) {
+  border-bottom: 1px solid #c8c7cc;
+}
+row.item:not(:only-child):last-child {
+  border-bottom: 0;
+}
+row.item:only-child:last-child {
+  border-bottom: 1px solid #c8c7cc;
+}
+
+label.select {
+  border-radius: 5px;
+}
+label.select input {
+  border: 2px solid #007aff;
+}
+label.select:after {
+  content: "\f0d7 " !important;
+  border: 2px solid #007aff;
+}
+label.select:active:after {
+  background-color: #007aff;
+  color: white;
+}
+
+label.text {
+  border-radius: 5px;
+}
+label.text input {
+  border: 2px solid #007aff;
+}
+label.text:not(.noicon):after {
+  content: "\f040  " !important;
+  border: 2px solid #007aff;
+}
+
+label.username {
+  background-color: white;
+  border-radius: 5px;
+}
+label.username input {
+  border: 2px solid #007aff;
+}
+label.username:not(.noicon):before {
+  content: "\f007" !important;
+  border: 2px solid #007aff;
+}
+
+label.password {
+  background-color: white;
+  border-radius: 5px;
+}
+label.password input {
+  border: 2px solid #007aff;
+}
+label.password:not(.noicon):before {
+  content: "\f069 " !important;
+  border: 2px solid #007aff;
+}
+
+label.textarea {
+  border-radius: 5px;
+}
+
+a.button.add:after {
+  right: -10px;
+}
+
+a.button.locate {
+  padding: 3px;
+}
+a.button.locate:after, a.button.locate:before {
+  zoom: 1.2;
+}
+
+label.checkbox:before {
+  color: black;
+}
+label.checkbox input {
+  border-radius: 25px;
+  background-color: #c8c7cc;
+  border: 2px solid #007aff;
+}
+label.checkbox input:after {
+  background-color: #0cafe8;
+  border-radius: 25px;
+  display: -webkit-box;
+  box-sizing: border-box;
+  -webkit-box-flex: 1;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  -webkit-box-orient: vertical;
+  width: 30px;
+  height: 100%;
+  padding: 0;
+  border: 2px solid #007aff;
+  color: #007aff;
+  margin-left: 15px;
+  -webkit-transition: margin 100ms linear;
+}
+label.checkbox input:checked {
+  background-color: #c8c7cc;
+}
+label.checkbox input:checked:after {
+  background-color: #ffd800;
+  margin-left: -15px;
+  border: 2px solid #e8b00c;
+  color: #e8b00c;
+}
+label.checkbox input:before {
+  top: 15px;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: small;
+}
+
+li {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+li:not(:only-child) {
+  border-bottom: 1px solid #c8c7cc;
+}
+
+li:only-child {
+  border-bottom: 1px solid #c8c7cc;
+}
+
+a.button {
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid #007aff;
+  margin: 5px;
+  color: #007aff;
+  font-weight: normal;
+}
+
+float.master {
+  border: 2px solid #8e8e93;
+  background-color: #efeff4;
+  border-radius: 5px;
+}
+
+float.head {
+  text-transform: uppercase;
+  font-weight: normal;
+  color: black;
+  background-color: transparent;
+  border-bottom: 1px solid #c8c7cc;
+}
+float.head p {
+  padding-left: 20px;
+  -webkit-box-align: center;
+  -webkit-box-pack: start;
+  -webkit-box-orient: horizontal;
+}
+float.head a.button {
+  margin: 0;
+  padding: 10px;
+  border-radius: 0px;
+}
+
+float.content {
+  background-color: white;
+}
+float.content panel {
+  background-color: white;
+}
+
+display.master {
+  border: 2px solid #8e8e93;
+  background-color: #efeff4;
+  border-radius: 5px;
+}
+
+display.head {
+  text-transform: uppercase;
+  font-weight: normal;
+  color: black;
+  background-color: transparent;
+  border-bottom: 1px solid #c8c7cc;
+}
+display.head p {
+  padding-left: 20px;
+  -webkit-box-align: center;
+  -webkit-box-pack: start;
+  -webkit-box-orient: horizontal;
+}
+display.head a.button {
+  margin: 0;
+  padding: 10px;
+  border-radius: 0;
+}
+
+display.content {
+  background-color: white;
+}
+
+display.end {
+  border-top: 1px solid #c8c7cc;
+}
+display.end a {
+  margin: 10px 0px;
+  padding: 10px;
+  min-width: 100px;
+  max-width: 100px;
+}
+display.end a:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-right: -1px;
+}
+display.end a:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: -1px;
+}
+display.end a:not(:first-child):not(:last-child) {
+  border-radius: 0;
+  margin-left: -1px;
+  margin-right: -1px;
+}
+
+message {
+  background-color: white;
+  border: 2px solid #007aff;
+  border-radius: 5px;
+}
+message:before {
+  font-size: 1.5em;
+  font-weight: normal;
+}
+
+spinner message {
+  border: 4px solid #007aff;
+}
+spinner message:last-child {
+  border-left: 0;
+}
+spinner icon {
+  background-image: url("712.GIF");
+  background-color: white;
+  border: 4px solid #007aff;
+}
+
+message.spin:before {
+  background-image: url("712.GIF");
+}
+
+a:active {
+  background-color: #007aff !important;
+  color: white !important;
+}
+
+dropdown.master {
+  position: relative;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #007aff;
+  border-top: 0;
+  margin-left: -2px;
+  margin-right: -2px;
+  background-color: #efeff4;
+}
+dropdown.master.expand .head {
+  border-bottom: 0;
+}
+
+dropdown.head {
+  background-color: white;
+  position: relative;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #007aff;
+  box-sizing: content-box;
+  border-color: #007aff;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+dropdown.content .master {
+  margin-top: -2px;
+  border-radius: 0;
+  border-top: 2px solid #007aff;
+}
+dropdown.content .master.collapse {
+  border-bottom: 0;
+}
+dropdown.content .head {
+  border-left: 2px solid #007aff;
+  margin-left: 0px;
+  margin-right: 0px;
+  background-color: white;
+}
+dropdown.content .content {
+  border-left: 2px solid #007aff;
+  border-bottom: 2px solid #007aff;
+  background-color: white;
+}
+dropdown.content .content:empty {
+  border: 0;
+  margin: 0;
+}
+dropdown.content row.item {
+  margin: 0;
+}
+dropdown.content row.item p:first-of-type {
+  border-right: 1px solid #dddbdb;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+dropdown.content row.item p:last-of-type {
+  margin: 5px;
+}
