@@ -51,18 +51,18 @@ try{
 	if( ThisDevice.IOS ){
 		$('#deviceStyle').attr("href", "css/ios.css");
 			if( parseFloat( ThisDevice.Version ) >= 7 ){
-				$('body').css({
+				$('page').css({
 					"padding-top" : "20px",
 				});
 			}
 	}
 	//Android Style
 	if( ThisDevice.Android ){
-		$('#deviceStyle').attr("href", "css/ios.css");
+		$('#deviceStyle').attr("href", "css/android.css");
 	}
 	//Default Style
 	if( !ThisDevice.Android && !ThisDevice.IOS ){
-		$('#deviceStyle').attr("href", "css/ios.css");
+		$('#deviceStyle').attr("href", "css/android.css");
 	}
 
 	//Auto fill the username and password input fields
@@ -73,7 +73,7 @@ try{
 	//Filesystem request size; 0 by default
 	var MAXZOOM = 2.0, MINZOOM = 1.0, MAPWIDTH = 1000, MAPHEIGHT = 750, SAFEDEVICES = 30, RequestSize;
 	//Server URL's
-	var URL = "http://192.168.100.109:1234", ServerURL = URL+"/mobile.asmx";
+	var URL = "http://192.168.100.111:1234", ServerURL = URL+"/mobile.asmx";
 
 
 
@@ -181,8 +181,8 @@ try{
 			$('#DeviceImageDisplay').attr("novis", "")
 		},
 		loadImage: function( path ){
-			$('#DeviceImageDisplay>content').empty().append("<img/>");
-			var i = $('#DeviceImageDisplay>content>img');
+			$('#DeviceImageDisplay>display.content').empty().append("<img/>");
+			var i = $('#DeviceImageDisplay>display.content>img');
 
 			var img = new Image();
 			img.src = path;
@@ -223,14 +223,14 @@ try{
 			}
 		},
 		ClearImage: function(e){
-			$('#DeviceImageDisplay>content').empty();
+			$('#DeviceImageDisplay>display.content').empty();
 		},
 		Resizemage: function(){
 			if( $('#DeviceImageDisplay').attr("novis") == null) {
 				console.log("Resizing");
 				console.log(  $('#DeviceImageDisplay').attr("novis") );
 
-				var img = $('#DeviceImageDisplay>content>img');
+				var img = $('#DeviceImageDisplay>display.content>img');
 				var w = img.width(), h = img.height(), nw, nh;
 
 				if( h < img.parent().height() && w < img.parent().width()){
@@ -314,90 +314,6 @@ function RequestLocalSystem(){
 		return LocalFileSystem.PERSISTENT;
 	}
 }
-
-/*$.ajax({
-	type: "POST",
-	url: ServerURL + "/GetMaps",
-	contentType: "application/json; charset=utf-8",
-	async: true,
-	data: JSON.stringify({
-		data: 2590
-	}),
-	dataType: 'json',
-	success: function( d, status, xhr ){
-		if( d.d == 0 ){
-			Maps.length = 0;
-		}else{
-			Maps = JSON.parse(d.d);
-		}
-		for (var i = 0; i < 100; i++) {
-			Maps.push(Maps[0])
-		};
-		DrawAvalibleMaps();
-	},
-	error: function(et, e) {
-	}
-});*/
-
-/*$.ajax({
-	type: "POST",
-	url: ServerURL + "/GetDevices",
-	contentType: "application/json; charset=utf-8",
-	async: true,
-	data: JSON.stringify({
-		data: 2590
-	}),
-	dataType: 'json',
-	success: function( d, status, xhr ){
-		if( d.d == 0){
-			Devices.length = 0;
-		}else{
-			Devices = JSON.parse(d.d)
-		}
-		OnMapDevices.length = 0;
-		OffMapDevices.length = 0;
-		for (var i = 0; i < Devices.length; i++) {
-			if( Devices[i].ID_Map == 0 ){
-				OnMapDevices.push( Devices[i] );
-			}
-			if( Devices[i].ID_Map == 0 ){
-				OffMapDevices.push( Devices[i] );
-			}
-		};
-		OnMapDevices = SplitIntoGroups( OnMapDevices );
-		OffMapDevices = SplitIntoGroups( OffMapDevices );
-		OnMapFunctions.empty();
-		OffMapFunctions.empty();
-		LoadOnMapDevices();
-		LoadOffMapDevices();
-		setTimeout(function() {
-			OnMapFunctions.MoveForward();
-		}, 100);
-	},
-	error: function(et, e) {
-	}
-});*/
-
-/*$.ajax({
-	type: "POST",
-	url: ServerURL + "/GetAvalibleGroups",
-	contentType: "application/json; charset=utf-8",
-	async: true,
-	data: JSON.stringify({
-		data: 1
-	}),
-	dataType: 'json',
-	success: function( d, status, xhr ){
-		Groups = JSON.parse(d.d);
-		// LogIt( "Groups Count: " + Groups.length);
-		// if( Groups != 0){
-		// 	WriteFile.groups();
-		// }
-		GroupTree.MoveForward();
-	},
-	error: function(et, e) {
-	}
-});*/
 
 var Ajax ={
 	// returns all groups that the user group ID has access to based off the groupPath
@@ -906,6 +822,7 @@ function ReturnBlob( data ){
 							else
 								Spinner.hide();
 								AddMessage("Connection offline, Unable to download groups", "long", "bottom");
+								// alert("Unable to download groups. Please check your connection");
 						}else{
 							File.error(e);
 						}
@@ -1333,6 +1250,58 @@ function ReturnBlob( data ){
 		}
 	}
 
+
+	// function orientationFix(e){
+	// 	var orientRotation = window.orientation;
+	// 	switch( orientRotation ){
+	// 		case 0:
+	// 			alert("landscape 0")
+	// 			OrientLandscape();
+	// 		break;
+	// 		case 90:
+	// 			alert("portrait 90")
+	// 			OrientPortrait();
+	// 		break;
+	// 		case 180:
+	// 			alert("landscape 180")
+	// 			OrientLandscape();
+	// 		break;
+	// 		case 270:
+	// 			alert("portrait 270")
+	// 			OrientPortrait();
+	// 		break;
+	// 	}
+
+	// 	function OrientPortrait(e){
+
+	// 		try{
+	// 			$('page').removeClass("landscape").addClass("portrait", "");
+	// 		}catch(e){
+	// 			alert( "OrientERRROR: " + e.toString() );
+	// 		}
+	// 		$('map>viewport').attr("novis", "");
+	// 		ClearDevices();
+	// 		setTimeout(function() {
+	// 			$('map>viewport').removeAttr("novis")
+	// 			ResizeMap();
+	// 		}, 100);
+	// 	}
+	// 	function OrientLandscape(e){
+	// 		try{
+	// 			$('page').removeClass("portrait").addClass("landscape", "")
+
+	// 		}catch(e){
+	// 			alert( "OrientERRROR: " + e.toString() );
+	// 		}
+	// 		$('map>viewport').attr("novis", "");
+	// 		ClearDevices();
+	// 		setTimeout(function() {
+	// 			$('map>viewport').removeAttr("novis")
+	// 			ResizeMap();
+	// 		}, 100);
+	// 	}
+	// }
+
 	function ClearDevices(){
 		$('viewport>pog').remove();
 	}
@@ -1458,12 +1427,10 @@ function ReturnBlob( data ){
 			s +="</row></scroll></panel>"
 			s += "</panel>";
 
-			s+= '<actionbar><a href="#" class="button backward" id="btnBackwards_On"></a><indicator>0</indicator><a href="#" class="button forward" id="btnforwards_On"></a></actionbar>'
-
-			// s += '<row class="master" style="-webkit-box-flex: 1; min-height: 40px;max-height: 40px;">'+
-			// 	'<row class="back">'+
-
-			// 	'</row></row>';
+			s += '<row class="master" style="-webkit-box-flex: 1; min-height: 40px;max-height: 40px;">'+
+				'<row class="back">'+
+				'<a href="#" class="button backward" id="btnBackwards_On"></a><indicator>0</indicator><a href="#" class="button forward" id="btnforwards_On"></a>'+
+				'</row></row>';
 
 			$('#DevicesonMapGroup').empty().append(s);
 			s.length = 0;
@@ -1571,7 +1538,11 @@ function ReturnBlob( data ){
 
 			s +="</row></scroll></panel>"
 			s += "</panel>";
-			s+= '<actionbar><a href="#" class="button backward" id="btnBackwards_Off"></a><indicator>0</indicator><a href="#" class="button forward" id="btnforwards_Off"></a></actionbar>'
+
+			s += '<row class="master" style="-webkit-box-flex: 1; min-height: 40px;max-height: 40px;">'+
+				'<row class="back">'+
+				'<a href="#" class="button backward" id="btnBackwards_Off"></a><indicator>0</indicator><a href="#" class="button forward" id="btnforwards_Off"></a>'+
+				'</row></row>';
 
 			$('#MissingDevicesGroups').empty().append(s);
 			s.length = 0;
@@ -1704,118 +1675,9 @@ function ReturnBlob( data ){
 		return returnArray;
 	}
 
-	//Use this to replace DrawAvalibleMaps.
-	// var MapFunctions = {
-	// 	current: 0,
-	// 	RootGroup: function(){
-	// 		var s = "";
-	// 		s += "<panel class='group'>";
-	// 		s += "<panel open class='child '><scroll class='y'><row class='content'>"
-
-	// 		for (var j = 0; j < OffMapDevices[0].length; j++) {
-	// 			var id = OffMapDevices[0][j].ID_Device, desc = OffMapDevices[0][j].Description, serial = OffMapDevices[0][j].SerialNumber;
-	// 			if( desc.length == 0) desc = "No Description";
-	// 			if( serial.length == 0) serial = "No Serial Number";
-	// 			s += "<row class='button item uDevice' id='"+id+"'><span><name>"+desc+"</name><serial>"+serial+"</serial></span></row>";
-	// 		};
-
-	// 		s +="</row></scroll></panel>"
-	// 		s += "</panel>";
-	// 		s+= '<actionbar><a href="#" class="button backward" id="btnBackwards_Off"></a><indicator>0</indicator><a href="#" class="button forward" id="btnforwards_Off"></a></actionbar>'
-
-	// 		$('#MissingDevicesGroups').empty().append(s);
-	// 		s.length = 0;
-	// 		OffMapFunctions.current = 0;
-	// 		Spinner.hide();
-	// 	},
-	// 	NextGroup: function(){
-	// 		var s = "";
-	// 		s += "<panel right class='child '><scroll class='y'><row class='content'>"
-	// 		console.log( OffMapFunctions.current );
-	// 		for (var j = 0; j < OffMapDevices[OffMapFunctions.current].length; j++) {
-	// 			var id = OffMapDevices[OffMapFunctions.current][j].ID_Device, desc = OffMapDevices[OffMapFunctions.current][j].Description, serial = OffMapDevices[OffMapFunctions.current][j].SerialNumber;
-	// 			if( desc.length == 0) desc = "No Description";
-	// 			if( serial.length == 0) serial = "No Serial Number";
-	// 			s += "<row class='button item uDevice' id='"+id+"'><span><name>"+desc+"</name><serial>"+serial+"</serial></span></row>";
-	// 		};
-
-	// 		s +="</row></scroll></panel>"
-	// 		$('#MissingDevicesGroups>panel.group').append(s);
-	// 		$('#MissingDevicesGroups>panel.group>panel.child').attr("left", "").removeAttr("open").removeAttr("right");
-	// 		$('#MissingDevicesGroups>panel.group>panel.child:last-child').attr("open", "").removeAttr("left").removeAttr("right");
-	// 		setTimeout(function() {
-	// 			$('#MissingDevicesGroups>panel.group>panel.child:first-child').remove();
-	// 		}, 700);
-	// 		s.length = 0;
-	// 		Spinner.hide();
-	// 	},
-	// 	PrevGroup: function(){
-	// 		var s = "";
-	// 		s += "<panel left class='child '><scroll class='y'><row class='content'>"
-	// 		console.log( OffMapFunctions.current );
-	// 		for (var j = 0; j < OffMapDevices[OffMapFunctions.current].length; j++) {
-	// 			var id = OffMapDevices[OffMapFunctions.current][j].ID_Device, desc = OffMapDevices[OffMapFunctions.current][j].Description, serial = OffMapDevices[OffMapFunctions.current][j].SerialNumber;
-	// 			if( desc.length == 0) desc = "No Description";
-	// 			if( serial.length == 0) serial = "No Serial Number";
-	// 			s += "<row class='button item uDevice' id='"+id+"'><span><name>"+desc+"</name><serial>"+serial+"</serial></span></row>";
-	// 		};
-
-	// 		s +="</row></scroll></panel>"
-	// 		$('#MissingDevicesGroups>panel.group').append(s);
-	// 		$('#MissingDevicesGroups>panel.group>panel.child').attr("right", "").removeAttr("open").removeAttr("left");
-	// 		$('#MissingDevicesGroups>panel.group>panel.child:last-child').attr("open", "").removeAttr("left").removeAttr("right");
-	// 		setTimeout(function() {
-	// 			$('#MissingDevicesGroups>panel.group>panel.child:first-child').remove();
-	// 		}, 700);
-	// 		s.length = 0;
-	// 		Spinner.hide();
-	// 	},
-	// 	empty:function(){
-	// 		OffMapFunctions.current = -1;
-	// 		var s = "";
-	// 		s += "<row class='item none' id='none'><span><name>No Devices</name><serial>This map has no devices</serial></span></row>";
-	// 		$('#MissingDevicesGroups').empty().append(s);
-	// 		s.length = 0;
-	// 		Spinner.hide();
-	// 	},
-	// 	MoveForward: function(){
-
-	// 		if( OffMapDevices.length > 0){
-	// 			if( OffMapFunctions.current == -1){
-	// 				Spinner.hide();
-	// 				Spinner.show();
-	// 				OffMapFunctions.RootGroup();
-	// 			}else{
-	// 				OffMapFunctions.current++;
-	// 				if( OffMapFunctions.current < (OffMapDevices.length)){
-	// 					Spinner.hide();
-	// 					Spinner.show();
-	// 					OffMapFunctions.NextGroup();
-	// 					$('a.button#btnforwards_Off').prev('indicator').html( OffMapFunctions.current );
-
-	// 				}else{
-	// 					OffMapFunctions.current--;
-	// 				}
-	// 			}
-	// 		}else{
-	// 			OffMapFunctions.empty();
-	// 		}
-	// 	},
-	// 	MoveBackward: function(){
-	// 		OffMapFunctions.current--;
-	// 		if( OffMapFunctions.current < 0 ){
-	// 			OffMapFunctions.current = 0;
-	// 		}else{
-	// 			Spinner.hide();
-	// 			Spinner.show();
-	// 			OffMapFunctions.PrevGroup();
-	// 			$('a.button#btnforwards_Off').prev('indicator').html( OffMapFunctions.current );
-	// 		}
-	// 	}
-	// }
-
 	function DrawAvalibleMaps(){
 		$('#infoMapNum').val("Number of Maps : " + Maps.length );
+
 		if( Maps.length > 0 ){
 			var MapsClone = Maps.slice(0);
 			MapsClone = SplitIntoGroups( MapsClone );
@@ -1835,9 +1697,10 @@ function ReturnBlob( data ){
 			};
 			s+="</panel>"
 			if( MapsClone.length > 1 ){
-
-				s+= '<actionbar><a href="#" class="button backward" id="btnBackwards"></a><indicator>0</indicator><a href="#" class="button forward" id="btnforwards"></a></actionbar>'
-
+				s += '<row class="master" style="-webkit-box-flex: 1; min-height: 40px;max-height: 40px;">'+
+					'<row class="back">'+
+					'<a href="#" class="button backward" id="btnBackwards"></a><indicator>1</indicator><a href="#" class="button forward" id="btnforwards"></a>'+
+					'</row></row>';
 			}
 			$('#MapsMasterGroup').empty().append(s);
 			$('#MapsMasterGroup>panel.group').children().hide();
@@ -1871,6 +1734,196 @@ function ReturnBlob( data ){
 		s += "<row class='item none' id='none'><span><name>Loading Devices..</name><serial>This may take some time.</serial></span></row>";
 		$('#MissingDevicesGroups').empty().append(s);
 		s.length = 0;
+	}
+	/*function DrawOnMapDevices(){
+		Spinner.show();
+		OnMapDevices.length = 0;
+
+		for (var i = 0; i < Devices.length; i++) {
+			if( Devices[i].ID_Map == CurrentMap.ID_Map )
+				OnMapDevices.push( Devices[i] );
+		};
+
+		if( OnMapDevices.length>0){
+			OnMapDevices = SplitIntoGroups( OnMapDevices );
+
+				var s = "";
+				s+="<panel class='group'>"
+				for (var i = 0; i < OnMapDevices.length; i++) {
+					s += "<panel right class='child'><scroll class='y'><row class='content'>"
+					for (var j = 0; j < OnMapDevices[i].length; j++) {
+						var id = OnMapDevices[i][j].ID_Device, desc = OnMapDevices[i][j].Description, serial = OnMapDevices[i][j].SerialNumber;
+						if( desc.length == 0) desc = "No Description";
+						if( serial.length == 0) serial = "No Serial Number";
+						s += "<row class='button item mDevice' id='"+id+"'><span><name>"+desc+"</name><serial>"+serial+"</serial></span></row>";
+
+					};
+					s +="</row></scroll></panel>";
+				};
+				s+="</panel>";
+				if( OnMapDevices.lenght > 1 ){
+					s += '<row class="master" style="-webkit-box-flex: 1; min-height: 40px;max-height: 40px;">'+
+						'<row class="back">'+
+						'<a href="#" class="button backward" id="btnBackwards"></a><a href="#" class="button forward" id="btnforwards"></a>'+
+						'</row></row>';
+				}
+
+				console.log("Drawing");
+				$('#DevicesonMapGroup').empty().append(s);
+				setTimeout(function() {
+					$('#DevicesonMapGroup>panel.group>panel:first-child').attr("open", "").removeAttr("left").removeAttr("right");
+				}, 1);
+				s.length = 0;
+			Spinner.hide();
+		}else{
+			var s = "";
+			s += "<row class='item none' id='none'><span><name>No Devices</name><serial>This map has no devices</serial></span></row>";
+			console.log("Drawing");
+			$('#DevicesonMapGroup').empty().append(s);
+			s.length = 0;
+			Spinner.hide();
+		}
+	}*/
+	/*function DrawOffMapDevices(){
+		OffMapDevices.length = 0;
+		for (var i = 0; i < Devices.length; i++) {
+			if( Devices[i].ID_Map == 0 )
+				OffMapDevices.push( Devices[i] );
+		};
+
+		if( OffMapDevices.length>0){
+			OffMapDevices = SplitIntoGroups( OffMapDevices );
+
+				var s = "";
+				s += "<panel class='group'>";
+				for (var i = 0; i < OffMapDevices.length; i++) {
+					s += "<panel right class='child '><scroll class='y'><row class='content'>"
+					for (var j = 0; j < OffMapDevices[i].length; j++) {
+						var id = OffMapDevices[i][j].ID_Device, desc = OffMapDevices[i][j].Description, serial = OffMapDevices[i][j].SerialNumber;
+						if( desc.length == 0) desc = "No Description";
+						if( serial.length == 0) serial = "No Serial Number";
+						s += "<row class='button item uDevice' id='"+id+"'><span><name>"+desc+"</name><serial>"+serial+"</serial></span></row>";
+					};
+					s +="</row></scroll></panel>"
+				};
+				s += "</panel>";
+				if( OffMapDevices.length > 1){
+					s += '<row class="master" style="-webkit-box-flex: 1; min-height: 40px;max-height: 40px;">'+
+						'<row class="back">'+
+						'<a href="#" class="button backward" id="btnBackwards"></a><a href="#" class="button forward" id="btnforwards"></a>'+
+						'</row></row>';
+				}
+
+				console.log("Drawing");
+				$('#MissingDevicesGroups').empty().append(s);
+				setTimeout(function() {
+					$('#MissingDevicesGroups>panel.group>panel:first-child').attr("open", "").removeAttr("left").removeAttr("right");
+				}, 1);
+				s.length = 0;
+
+			Spinner.hide();
+		}else{
+			var s = "";
+			s += "<row class='item none' id='none'><span><name>No Devices</name><serial>This group has no missing devices</serial></span></row>";
+			console.log("Drawing");
+			$('#MissingDevicesGroups').empty().append(s);
+			s.length = 0;
+			Spinner.hide();
+		}
+	}*/
+
+
+
+
+
+	function DrawAvalibleDevices(){
+		alert("What are you doing? this takes way too long, remove it, but remember what you pressed to get here")
+/*		$('#infoDeviceNum').val("Number of Devices : " + Devices.length );
+		var OnMap = new Array(); OffMap = new Array();
+
+		for (var i = 0; i < Devices.length; i++) {
+			if( Devices[i].ID_Map == CurrentMap.ID_Map){
+				OnMap.push( Devices[i] );
+			}
+			if( Devices[i].ID_Map == 0 ){
+				OffMap.push( Devices[i] );
+			}
+		};
+
+		if( OnMap.length > 0 ){
+			OnMap = SplitIntoGroups( OnMap );
+			var s = "";
+			s+="<panel class='group'>"
+			for (var i = 0; i < OnMap.length; i++) {
+				s += "<panel right class='child'><scroll class='y'><row class='content'>"
+				for (var j = 0; j < OnMap[i].length; j++) {
+					var id = OnMap[i][j].ID_Device, desc = OnMap[i][j].Description, serial = OnMap[i][j].SerialNumber;
+					if( desc.length == 0) desc = "No Description";
+					if( serial.length == 0) serial = "No Serial Number";
+					s += "<row class='button item mDevice' id='"+id+"'><span><name>"+desc+"</name><serial>"+serial+"</serial></span></row>";
+
+				};
+				s +="</row></scroll></panel>";
+			};
+			s+="</panel>";
+			if( OnMap.lenght > 1 ){
+				s += '<row class="master" style="-webkit-box-flex: 1; min-height: 40px;max-height: 40px;">'+
+					'<row class="back">'+
+					'<a href="#" class="button backward" id="btnBackwards"></a><a href="#" class="button forward" id="btnforwards"></a>'+
+					'</row></row>';
+			}
+
+			console.log("Drawing");
+			$('#DevicesonMapGroup').empty().append(s);
+			setTimeout(function() {
+				$('#DevicesonMapGroup>panel.group>panel:first-child').attr("open", "").removeAttr("left").removeAttr("right");
+			}, 1);
+			s.length = 0;
+		}else{
+			var s = "";
+			s += "<row class='item none' id='none'><span><name>No Devices</name><serial>This map has no devices</serial></span></row>";
+			console.log("Drawing");
+			$('#DevicesonMapGroup').empty().append(s);
+			s.length = 0;
+		}
+
+		if( OffMap.length > 0 ){
+			OffMap = SplitIntoGroups( OffMap );
+			var s = "";
+			console.log("Need to create : " + OffMap.length + " panels")
+
+			s += "<panel class='group'>";
+			for (var i = 0; i < OffMap.length; i++) {
+				s += "<panel right class='child '><scroll class='y'><row class='content'>"
+				for (var j = 0; j < OffMap[i].length; j++) {
+					var id = OffMap[i][j].ID_Device, desc = OffMap[i][j].Description, serial = OffMap[i][j].SerialNumber;
+					if( desc.length == 0) desc = "No Description";
+					if( serial.length == 0) serial = "No Serial Number";
+					s += "<row class='button item uDevice' id='"+id+"'><span><name>"+desc+"</name><serial>"+serial+"</serial></span></row>";
+				};
+				s +="</row></scroll></panel>"
+			};
+			s += "</panel>";
+			if( OffMap.length > 1){
+				s += '<row class="master" style="-webkit-box-flex: 1; min-height: 40px;max-height: 40px;">'+
+					'<row class="back">'+
+					'<a href="#" class="button backward" id="btnBackwards"></a><a href="#" class="button forward" id="btnforwards"></a>'+
+					'</row></row>';
+			}
+
+			console.log("Drawing");
+			$('#MissingDevicesGroups').empty().append(s);
+			setTimeout(function() {
+				$('#MissingDevicesGroups>panel.group>panel:first-child').attr("open", "").removeAttr("left").removeAttr("right");
+			}, 1);
+			s.length = 0;
+		}else{
+			var s = "";
+			s += "<row class='item none' id='none'><span><name>No Devices</name><serial>This group has no missing devices</serial></span></row>";
+			console.log("Drawing");
+			$('#MissingDevicesGroups').empty().append(s);
+			s.length = 0;
+		}*/
 	}
 
 	function DrawTotalDevices(){
@@ -2026,25 +2079,25 @@ function ReturnBlob( data ){
 
 	var PhoneGap = {
 		ready: function( event ){
-			alert("1")
 			navigator.splashscreen.show();
+
 			Connection.online = true;
 			Connection.status = "online";
-			alert("1")
+
 			Shadow.hide();
 			ResetDeviceInformation();
 			DrawAvalibleMaps()
 			DrawTotalDevices();
-			alert("3")
 
 			OnMapFunctions.empty();
 			OffMapFunctions.empty();
-			alert("4")
+
+
 			// DrawOnMapDevices();
 			// DrawOffMapDevices();
 			DrawDate()
 			DrawTitle()
-			alert("5")
+
 			if( ThisDevice.Browser == true){
 				Connection.type = "WiFi";
 			}else{
@@ -2054,7 +2107,7 @@ function ReturnBlob( data ){
 			// $("#btnBin").parents('row.master').attr("novis", "");
 			$('#deleteoptions').attr("novis", "");
 			$('#deleteoptions').prev().removeAttr("novis");
-			alert("6")
+
 			if( LAZY ){
 				$('#inputUsername').val( "craig" );
 				$('#inputPassword').val( "password" );
@@ -2150,6 +2203,7 @@ function ReturnBlob( data ){
 					$('#infoDeviceDescription').val( CurrentDevice.Description );
 
 					CurrentDevice = Devices[i];
+					// DrawAvalibleDevices();
 					DisplayDeviceInformation();
 					DeviceChange = true;
 				}
@@ -2160,6 +2214,7 @@ function ReturnBlob( data ){
 					$('#infoDeviceLocation').val( CurrentDevice.Location );
 
 					CurrentDevice = Devices[i];
+					// DrawAvalibleDevices();
 					DisplayDeviceInformation();
 					DeviceChange = true;
 				}
@@ -2170,6 +2225,7 @@ function ReturnBlob( data ){
 					$('#infoDeviceSerialNumber').val( CurrentDevice.SerialNumber );
 
 					CurrentDevice = Devices[i];
+					// DrawAvalibleDevices();
 					DisplayDeviceInformation();
 					DeviceChange = true;
 				}
@@ -2178,10 +2234,14 @@ function ReturnBlob( data ){
 					Devices[i].AssetNumber = result;
 					AddChanges( CurrentDevice.ID_Device, 'assetnumber', result );
 					$('#infoDeviceAssetNumber').val( CurrentDevice.AssetNumber );
+
 					CurrentDevice = Devices[i];
+					// DrawAvalibleDevices();
 					DisplayDeviceInformation();
 					DeviceChange = true;
 				}
+
+
 				// DisplayDeviceInformation();
 			}
 		};
@@ -2269,8 +2329,7 @@ function ReturnBlob( data ){
 
 			// DrawTitle()
 			$('li.button.remove').removeClass("remove");
-			// $('#btnBinSelected').html(Delete.length+" selected");
-			$('#deleteoptions').html(Delete.length+" selected");
+			$('#btnBinSelected').html(Delete.length+" selected");
 			$('#deleteoptions').attr("novis", "");
 			$('#deleteoptions').prev().removeAttr("novis");
 			CurrentGroup = Groups[ num ];
@@ -2315,10 +2374,11 @@ function ReturnBlob( data ){
 			$('#infoDeviceSerialNumber').val( CurrentDevice.SerialNumber);
 		}
 		if( CurrentDevice.AssetNumber == "" || CurrentDevice.AssetNumber == null){
- 			$('#infoDeviceAssetNumber').val("No Asset Number");
- 		}else{
- 			$('#infoDeviceAssetNumber').val( CurrentDevice.AssetNumber );
- 		}
+			$('#infoDeviceAssetNumber').val("No Asset Number");
+		}else{
+		$('#infoDeviceAssetNumber').val( CurrentDevice.AssetNumber );
+
+		}
 
 		if( CurrentDevice.Locked == true ){
 			//Remember to update devices on the map view
@@ -2445,6 +2505,7 @@ function ReturnBlob( data ){
 
 		AppStarted = true;
 		 if( ThisDevice.Browser == true){
+			//Hiding SplashScreen
 		}else{
 			navigator.splashscreen.hide();
 		}
@@ -2466,22 +2527,18 @@ function ReturnBlob( data ){
 	}
 
 	$('#btnLogbook').hammer( HammerOptions ).on("tap", function ( event ){
+		console.log("hizsdbgfhsdfhidbh");
 		Shadow.show();
 		$('#logbook').removeAttr("novis");
 	});
 
 
 	$('#btnTogPanel').hammer( HammerOptions ).on("tap", function ( event ){
-
 		event.preventDefault();
+
 		if( openPanel == false ){
 			openPanel = true;
-
-
-
-		$('page#main').toggleClass("out").toggleClass("in");
-
-			// $(this).parents('page').find('content>panel.master').toggleClass("out").toggleClass("in");
+			$(this).parents('page').find('content>panel.master').toggleClass("out").toggleClass("in");
 			$('map>viewport').attr("novis", "");
 			ClearDevices();
 			setTimeout(function() {
@@ -2514,9 +2571,8 @@ function ReturnBlob( data ){
 			}
 		}
 	});
-
 	$('#btnDeviceComments').hammer( HammerOptions ).on("tap", function(event){
-		$('#DeviceComments').removeAttr("novis");
+		alert("Open the comments box")
 	});
 
 	$('#btnContinue').hammer( HammerOptions ).on("tap", function ( event ){
@@ -2630,8 +2686,7 @@ function ReturnBlob( data ){
 			// $('#btnBin').parents('row.master').attr("novis", "");
 			$('#deleteoptions').attr("novis", "");
 			$('#deleteoptions').prev().removeAttr("novis");
-			// $('#btnBinSelected').html(" 0 ");
-			$('#deleteoptions').html("0");
+			$('#btnBinSelected').html(" 0 ");
 			Delete.length = 0;
 		}else{
 			AddMessage("Nothing to delete", "short", "top")
@@ -2810,9 +2865,8 @@ function ReturnBlob( data ){
 				$('#DevicesOnMapPanel').removeAttr("open").attr("left", "");
 				$('#MapsMasterPanel').removeAttr("right").removeAttr("left").attr("open", "");
 			}
-			if( $(this).parents('page.floating').attr("id") == "GroupSelect"){
-				console.log("OK");
-				var parentId = $(this).parents('actionbar').prev().find("panel[open]")
+			if( $(this).parents('float.master').attr("id") == "GroupSelect"){
+				var parentId = $(this).parents('row.master').prev().find("panel[open]")
 				if( parentId.prev().attr("root") != null )
 					$('#GroupsMasterGroup').parent().next().attr("novis","");
 				$.each($('#GroupsMasterGroup>panel.group').find('row.item'), function(index, item){
@@ -2990,8 +3044,7 @@ function ReturnBlob( data ){
 								for (var i = 0; i < Delete.length; i++) {
 									if( Delete[i] == $(prev.target).attr("id") ){
 										Delete.splice(i,1);
-										// $('#btnBinSelected').html(Delete.length+" selected");
-										$('#deleteoptions').html(Delete.length+" selected");
+										$('#btnBinSelected').html(Delete.length+" selected");
 
 									}
 								};
@@ -3020,8 +3073,7 @@ function ReturnBlob( data ){
 								}
 
 								Delete.push($(prev.target).attr("id"));
-								// $('#btnBinSelected').html(Delete.length+" selected");
-								$('#deleteoptions').html(Delete.length+" selected");
+								$('#btnBinSelected').html(Delete.length+" selected");
 								$(prev.target).addClass("remove");
 							}
 
@@ -3109,8 +3161,7 @@ function ReturnBlob( data ){
 							// $('#btnBin').parents('row.master').attr("novis", "");
 							$('#deleteoptions').attr("novis", "");
 							$('#deleteoptions').prev().removeAttr("novis");
-							// $('#btnBinSelected').html(" 0 ");
-							$('#deleteoptions').html("0");
+							$('#btnBinSelected').html(" 0 ");
 
 							AddDeviceOnMap( x, y);
 
@@ -3293,7 +3344,7 @@ function ReturnBlob( data ){
 	$("#inputselectGroup").parent().hammer( HammerOptions ).on("tap", function(e){
 		$('#MapTitle').empty().html("OneStop");
 
-		if( $('page#GroupSelect').attr("novis") != null){
+		if( $('float#GroupSelect').attr("novis") != null){
 			Shadow.show();
 
 			setTimeout(function() {
@@ -3304,18 +3355,15 @@ function ReturnBlob( data ){
 				CurrentDevice = new Object();
 				OffMapDevices.length = 0;
 				OnMapDevices.length = 0;
-					$('page#GroupSelect').removeAttr("novis")
+					$('float#GroupSelect').removeAttr("novis")
 			}, 10);
 		}
 	});
 
 	$(window).hammer( HammerOptions ).on("tap",'a.button.close',function(e){
 		Shadow.hide();
-		$(this).parent().parent().attr("novis", "");
-
-		// $(this).parents('float.master').attr("novis", "");
-
-		if( $(this).parents('page.floating').attr("id") == "logbook" ){
+		$(this).parents('float.master').attr("novis", "");
+		if( $(this).parents('float.master').attr("id") == "logbook" ){
 			$('#logbookLog').children('.master').removeClass("expand").removeClass("collapse").addClass("expand");
 		};
 
@@ -3352,7 +3400,7 @@ function ReturnBlob( data ){
 			};
 			movingGroup = true;
 			setTimeout(function() {
-				$('#GroupSelect').attr("novis", "");
+				$('float#GroupSelect').attr("novis", "");
 				Shadow.hide();
 			},100);
 
@@ -3415,6 +3463,18 @@ function ReturnBlob( data ){
 		var title="", msg="",buttons=["Ok","Cancel"],value="", defaultText="";
 		console.log( target )
 		switch( target ){
+			case "infoDeviceAssetNumber":
+				NotifyPrompt(
+					"Give the device a new Asset Number",
+					function(results){
+						if( results.buttonIndex == 1){
+							ChangeInformation( results.input1, "assetnumber");
+						}
+					},
+					"Asset Number",
+					buttons,
+					CurrentDevice.AssetNumber);
+			break;
 			case "infoDeviceDescription":
 				NotifyPrompt(
 					"Give the device a new description",
@@ -3453,18 +3513,6 @@ function ReturnBlob( data ){
 					buttons,
 					CurrentDevice.SerialNumber);
 			break;
-			case "infoDeviceAssetNumber":
- 				NotifyPrompt(
- 					"Give the device a new Asset number",
- 					function(results){
- 						if( results.buttonIndex == 1){
- 							ChangeInformation( results.input1, "assetnumber");
- 						}
- 					},
- 					"Asset Number",
- 					buttons,
- 					CurrentDevice.AssetNumber);
- 			break;
 			case "infoDevicePosition":
 				return 0;
 			break;
@@ -3524,12 +3572,13 @@ function ReturnBlob( data ){
 	})
 
 	$('shadow').hammer( HammerOptions ).on("touch release", function(e){
-		if( !$('#GroupSelect').attr("novis") )
-			$('#GroupSelect').attr("novis", "");
+		if( !$('float#GroupSelect').attr("novis") )
+			$('float#GroupSelect').attr("novis", "");
 		if( !$('#logbook').attr("novis") ){
 			$('#logbook').attr("novis", "");
 			$('#logbookLog').children('.master').removeClass("expand").removeClass("collapse").addClass("expand");
 		}
+
 		if( !$('#DeviceImageDisplay').attr("novis") )
 			DeviceImage.hide();
 
@@ -3554,11 +3603,8 @@ function ReturnBlob( data ){
 		var indicator = $(this).prev('indicator')
 		var num = parseInt( indicator.html() );
 
-		var group = $(this).parent().prev();
-
-		// group = $(group).prev();
-			console.log( group );
-
+		var group = $(this).parents('row.master')[0];
+		group = $(group).prev();
 		// group.children('panel[right]>scroll').scrollTop(0);
 		if( group.children('panel[open]').next().length != 0 ){
 			if( !moving ){
@@ -3582,7 +3628,8 @@ function ReturnBlob( data ){
 	$(window).hammer(HammerOptions).on("tap", "a.button#btnbackwards", function(e){
 		var indicator = $(this).next('indicator');
 		var num = parseInt( indicator.html() );
-		var group = $(this).parent().prev();
+		var group = $(this).parents('row.master')[0];
+			group = $(group).prev();
 		// group.children('panel[right]>scroll').scrollTop(0);
 		if( group.children('panel[open]').prev().length != 0 ){
 			if( !moving ){
