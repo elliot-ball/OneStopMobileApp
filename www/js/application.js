@@ -17,6 +17,11 @@ try{
 		type: "none",
 		online: false,
 	}
+	// var Connection = {
+	// 	status: "online",
+	// 	type: "none",
+	// 	online: true,
+	// }
 
 	//For testing on PC-Browser
 	ThisDevice.Browser = false;
@@ -73,7 +78,7 @@ try{
 	//Filesystem request size; 0 by default
 	var MAXZOOM = 2.0, MINZOOM = 1.0, MAPWIDTH = 1000, MAPHEIGHT = 750, SAFEDEVICES = 30, RequestSize;
 	//Server URL's
-	var URL = "http://192.168.100.107", ServerURL = URL+"/mobile.asmx";
+	var URL = "http://192.168.100.108", ServerURL = URL+"/mobile.asmx";
 
 
 
@@ -166,7 +171,7 @@ try{
 		},
 		hide: function(e){
 			if( !ThisDevice.Browser ){
-				window.plugins.spinnerDialog.hide();
+				window.plugins.spinnerDialog.hide(); //temp comment
 			}
 		}
 	}
@@ -260,6 +265,7 @@ try{
 // AjaxUserLogin( "craig","password");
 
 	function AjaxUserLogin( login, pass ){
+		console.log("AjaxUserLogin entered");
 		document.activeElement.blur();
 		$(document).blur();
 		$.ajax({
@@ -1944,7 +1950,7 @@ function ReturnBlob( data ){
 	var PhoneGap = {
 		ready: function( event ){
 
-			navigator.splashscreen.show();
+			navigator.splashscreen.show(); //temp comment
 
 			Connection.online = true;
 			Connection.status = "online";
@@ -1965,7 +1971,8 @@ function ReturnBlob( data ){
 			if( ThisDevice.Browser == true){
 				Connection.type = "WiFi";
 			}else{
-				Connection.type = navigator.connection.type;
+				Connection.type = navigator.connection.type; //temp comment
+				// Connection.type = navigator.connection;
 			}
 
 			// $("#btnBin").parents('row.master').attr("novis", "");
