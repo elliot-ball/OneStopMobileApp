@@ -1,4 +1,5 @@
 Zepto(function($){
+	window.plugins = null;
 try{
 
 	// window.onorientationchange = orientationFix;
