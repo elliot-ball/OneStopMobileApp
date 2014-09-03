@@ -26,7 +26,7 @@ try{
 	// }
 
 	//For testing on PC-Browser
-	ThisDevice.Browser = true;
+	ThisDevice.Browser = false;
 
 	//Set up scrolling elements
 	$.each( $('scroll.y'), function(index, item){
