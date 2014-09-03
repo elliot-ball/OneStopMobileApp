@@ -1,5 +1,6 @@
+
 Zepto(function($){
-	window.plugins = null;
+
 try{
 
 	// window.onorientationchange = orientationFix;
@@ -25,7 +26,7 @@ try{
 	// }
 
 	//For testing on PC-Browser
-	ThisDevice.Browser = false;
+	ThisDevice.Browser = true;
 
 	//Set up scrolling elements
 	$.each( $('scroll.y'), function(index, item){
@@ -167,15 +168,16 @@ try{
 	var Spinner = {
 		show: function (e){
 			if( !ThisDevice.Browser ){
-				window.plugins.spinnerDialog.show();
+				// window.plugins.spinnerDialog.show();
 			}
 		},
 		hide: function(e){
 			if( !ThisDevice.Browser ){
-				window.plugins.spinnerDialog.hide(); //temp comment
+				// window.plugins.spinnerDialog.hide();
 			}
 		}
 	}
+
 	var DeviceImage = {
 		show: function(e){
 			$('#DeviceImageDisplay').removeAttr("novis")
@@ -266,7 +268,6 @@ try{
 // AjaxUserLogin( "craig","password");
 
 	function AjaxUserLogin( login, pass ){
-		console.log("AjaxUserLogin entered");
 		document.activeElement.blur();
 		$(document).blur();
 		$.ajax({
@@ -285,6 +286,7 @@ try{
 				User = JSON.parse(d.d);
 
 				if(User != 0){
+					console.log("login sucessful");
 					Settings.changes = 0;
 					Settings.logged = true;
 					Settings.logTime = GetToday();
@@ -294,8 +296,8 @@ try{
 					setTimeout(function() {
 						WriteFile.settings();
 					}, 10);
-
-				}else{
+				}
+				else{
 					setTimeout(function() {
 						Spinner.hide();
 						AddMessage("Incorrect Login details", "short", "top")
@@ -303,12 +305,14 @@ try{
 				}
 			},
 			error: function(et, e) {
+				console.log("Ajax error : " + e.toString());
 				setTimeout(function() {
 					Spinner.hide();
 					AddMessage("Ajax error : " + e.toString(), "long", "top")
 				}, 50);
 			}
 		});
+		console.log("AjaxUserLogin done");
 	}
 
 function RequestLocalSystem(){
@@ -1950,9 +1954,12 @@ function ReturnBlob( data ){
 
 	var PhoneGap = {
 		ready: function( event ){
-
-			navigator.splashscreen.show(); //temp comment
-
+			try{
+				navigator.splashscreen.show(); //temp comment
+			}
+			catch(e){
+				console.log("splashscreen failed : " + e)
+			}
 			Connection.online = true;
 			Connection.status = "online";
 
@@ -1981,8 +1988,8 @@ function ReturnBlob( data ){
 			$('#deleteoptions').prev().removeAttr("novis");
 
 			if( LAZY ){
-				$('#inputUsername').val( "craig" );
-				$('#inputPassword').val( "password" );
+				$('#inputUsername').val( "admin" );
+				$('#inputPassword').val( "admin" );
 			}
 			ReadFile.settings();
 		},
@@ -2046,7 +2053,9 @@ function ReturnBlob( data ){
 	}
 
 	function GetConnection(){
-		return Connection.online;
+		// testing code
+		// return Connection.online;
+		return true;
 	}
 
 	function ChangeInformation( result, attribute ){
@@ -2159,13 +2168,20 @@ function ReturnBlob( data ){
 	}
 
 	function AddMessage( msg, duration, position){
-		window.plugins.toast.show( msg, duration, position, function(a){
-			console.log("Toast success " + a);
-		}, function(a){
-			alert("Toast Error" + a);
-		})
-
-
+		// testing code
+		if (ThisDevice.Browser = false) {
+			window.plugins.toast.show( msg, duration, position, function(a){
+				console.log("Toast success " + a);
+			}, function(a){
+				alert("Toast Error" + a);
+			})
+		}
+		else{
+			console.log("toast plugin stopped : browser testing enabled");
+			console.log("msg = " + msg);
+			console.log("duration = " + duration);
+			console.log("position = " + position);
+			}
 	}
 
 	function ChangeGroup( num ){
